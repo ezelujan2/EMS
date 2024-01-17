@@ -1,169 +1,229 @@
-'use client'
+"use client";
 
-import { useState, useRef, useEffect } from 'react'
-import { Transition } from '@headlessui/react'
-import Image from 'next/image'
-import FeaturesBg from '@/public/images/features-bg.png'
-import FeaturesElement from '@/public/images/features-element.png'
+import { useState, useRef, useEffect } from "react";
+import { Transition } from "@headlessui/react";
+import Image from "next/image";
+import FeaturesBg from "@/public/images/features-bg.png";
+import FeaturesElement from "@/public/images/features-element.png";
+import presencia from "../public/images/presencia.jpg";
+import transformacion from "../public/images/transformacion.jpg";
+import poder from "../public/images/poder.jpg";
+import comunidad from "../public/images/comunidad.jpg";
+import classNames from "classnames";
 
 export default function Features() {
-  
-  const [tab, setTab] = useState<number>(1)
+  const [tab, setTab] = useState<number>(1);
 
-  const tabs = useRef<HTMLDivElement>(null)
+  const tabs = useRef<HTMLDivElement>(null);
 
   const heightFix = () => {
-    if (tabs.current && tabs.current.parentElement) tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`
-  }
+    if (tabs.current && tabs.current.parentElement)
+      tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`;
+  };
 
   useEffect(() => {
-    heightFix()
-  }, []) 
+    heightFix();
+  }, []);
 
   return (
     <section className="relative">
-
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div className="absolute inset-0 bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
+      <div
+        className="absolute inset-0 bg-gray-100 pointer-events-none mb-16"
+        aria-hidden="true"></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative max-w-full mx-auto px-4 sm:px-6">
         <div className="pt-12 md:pt-20">
-
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4">Explore the solutions</h1>
-            <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+            <h1 className="text-4xl md:text-7xl mb-4">Que es la EMS?</h1>
+            <p className="text-md md:text-xl text-gray-600">
+              La identidad de la EMS, cada valor es un pilar de compromiso.
+              Estos principios son más que palabras; son el núcleo de nuestra
+              misión educativa.
+            </p>
           </div>
-
-          {/* Section content */}
-          <div className="md:grid md:grid-cols-12 md:gap-6">
-
-            {/* Content */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
-              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                <h3 className="h3 mb-3">Powerful suite of tools</h3>
-                <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
+        </div>
+        <div className="flex md:flex-row flex-col-reverse">
+          {/* Columna 1 */}
+          <div className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center">
+            <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
+              <h1 className="text-4xl md:text-5xl text-center mb-4">
+                Presencia
+              </h1>
+              <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start">
+                Cultivar un ambiente donde cada persona se sienta valorada,
+                escuchada y conectada, reflejando así el amor y la atención a
+                Dios. Cultivar un ambiente donde cada persona se sienta
+                valorada, escuchada y conectada, reflejando así el amor y la
+                atención a Dios.
               </div>
-              {/* Tabs buttons */}
-              <div className="mb-8 md:mb-0">
-                <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                  href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(1); }}
-                >
-                  <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                  </div>
-                  <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
-                    </svg>
-                  </div>
-                </a>
-                <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                  href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(2); }}
-                >
-                  <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                  </div>
-                  <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z" fillRule="nonzero" />
-                    </svg>
-                  </div>
-                </a>
-                <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                  href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(3); }}
-                >
-                  <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                  </div>
-                  <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.334 8.06a.5.5 0 00-.421-.237 6.023 6.023 0 01-5.905-6c0-.41.042-.82.125-1.221a.5.5 0 00-.614-.586 6 6 0 106.832 8.529.5.5 0 00-.017-.485z" fill="#191919" fillRule="nonzero" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
+              <svg
+                className="mt-2 mx-auto md:mx-0"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M16 12L10 16.3301V7.66987L16 12Z"
+                  fill="currentColor"
+                />
+              </svg>
             </div>
-
-            {/* Tabs items */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
-              <div className="transition-all">
-                <div className="relative flex flex-col text-center lg:text-right" data-aos="zoom-y-out" ref={tabs}>
-                  {/* Item 1 */}
-                  <Transition
-                    show={tab === 1}
-                    appear={true}
-                    className="w-full"
-                    enter="transition ease-in-out duration-700 transform order-first"
-                    enterFrom="opacity-0 translate-y-16"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in-out duration-300 transform absolute"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 -translate-y-16"
-                    beforeEnter={() => heightFix()}
-                    unmount={false}                     
-                  >
-                    <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
-                    </div>
-                  </Transition>
-                  {/* Item 2 */}
-                  <Transition
-                    show={tab === 2}
-                    appear={true}
-                    className="w-full"
-                    enter="transition ease-in-out duration-700 transform order-first"
-                    enterFrom="opacity-0 translate-y-16"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in-out duration-300 transform absolute"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 -translate-y-16"
-                    beforeEnter={() => heightFix()}
-                    unmount={false}                     
-                  >
-                    <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
-                    </div>
-                  </Transition>
-                  {/* Item 3 */}
-                  <Transition
-                    show={tab === 3}
-                    appear={true}
-                    className="w-full"
-                    enter="transition ease-in-out duration-700 transform order-first"
-                    enterFrom="opacity-0 translate-y-16"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in-out duration-300 transform absolute"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 -translate-y-16"
-                    beforeEnter={() => heightFix()}
-                    unmount={false}                     
-                  >
-                    <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
-                    </div>
-                  </Transition>
-                </div>
-              </div>
-            </div>
-
           </div>
+          {/* Columna 2 */}
+          <div className="w-full md:w-3/5">
+            <Image
+              className="w-full rounded"
+              src={presencia}
+              width={800}
+              height={600}
+              alt="presencia"
+            />
+          </div>
+        </div>
 
+        <div className="mt-10 flex md:flex-row flex-col">
+          {/* Columna 1 */}
+          <div className="w-full md:w-3/5">
+            <Image
+              className="w-full rounded"
+              src={poder}
+              width={900}
+              height={600}
+              alt="poder"
+            />
+          </div>
+          {/* Columna 2 */}
+          <div className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center">
+            <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
+              <h1 className="text-4xl md:text-5xl text-center">Poder</h1>
+              <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start">
+                Guiando a cada estudiante hacia un camino de impacto y propósito
+                al servicio del Reino de Dios. Guiando a cada estudiante hacia
+                un camino de impacto y propósito al servicio del Reino de Dios.
+                Guiando a cada estudiante hacia un camino de impacto y propósito
+                al servicio del Reino de Dios. Guiando a cada estudiante hacia
+                un camino de impacto y propósito al servicio del Reino de Dios.
+              </div>
+              <svg
+                className="mt-2"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M16 12L10 16.3301V7.66987L16 12Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col-reverse md:flex-row items-center h-full">
+          {/* Columna 1 */}
+          <div className="w-full md:w-2/5 mx-auto mb-4 md:mb-0 md:items-center flex items-center justify-center">
+            <div className="rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5">
+              <h1 className="text-4xl md:text-5xl text-center mb-4">
+                Comunidad
+              </h1>
+              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
+                En comunidad las cosas se fortalecen cuando compartimos
+                propósitos y sueños. Juntos, construimos un camino sólido hacia
+                el crecimiento ministerial. En comunidad las cosas se fortalecen
+                cuando compartimos propósitos y sueños. Juntos, construimos un
+                camino sólido hacia el crecimiento ministerial.
+              </div>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="mt-2 mx-auto text-center">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M16 12L10 16.3301V7.66987L16 12Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </div>
+          {/* Columna 2 */}
+          <div className="w-full md:w-3/5">
+            <Image
+              className="w-full rounded"
+              src={comunidad}
+              width={800}
+              height={600}
+              alt="presencia"
+            />
+          </div>
+        </div>
+
+        <div className="mt-10 flex md:flex-row flex-col">
+          <div className="w-full md:w-3/5">
+            <Image
+              className="w-full  rounded"
+              src={transformacion}
+              width={900}
+              height={600}
+              alt="poder"
+            />
+          </div>
+          <div className="w-11/12 m-2 md:m-0 md:w-2/5 flex justify-center items-center mx-4">
+            <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 m-10">
+              <h1 className="text-4xl md:text-5xl text-center">
+                Transformación
+              </h1>
+              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
+                Somos transformados gracias a su sacrificio en la cruz,
+                conocerlo más nos ayuda a descubrirnos a nosotros mismos. Ser
+                transformados es abrazar nuestro llamado
+              </div>
+              <svg
+                className="mt-2"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M16 12L10 16.3301V7.66987L16 12Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
