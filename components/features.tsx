@@ -31,7 +31,7 @@ export default function Features() {
       <div
         className="absolute inset-0 bg-gray-100 pointer-events-none mb-16"
         aria-hidden="true"></div>
-      <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
+      <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2 top-7"></div>
 
       <div className="relative max-w-full mx-auto px-4 sm:px-6">
         <div className="pt-12 md:pt-20">
@@ -81,11 +81,9 @@ export default function Features() {
           </div>
           {/* Columna 2 */}
           <div className="w-full md:w-3/5">
-            <Image
+            <img
               className="w-full rounded"
-              src={presencia}
-              width={800}
-              height={600}
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459548/presencia_w73zfs.jpg"
               alt="presencia"
             />
           </div>
@@ -94,11 +92,9 @@ export default function Features() {
         <div className="mt-10 flex md:flex-row flex-col">
           {/* Columna 1 */}
           <div className="w-full md:w-3/5">
-            <Image
+            <img
               className="w-full rounded"
-              src={poder}
-              width={900}
-              height={600}
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459547/poder_nro5cd.jpg"
               alt="poder"
             />
           </div>
@@ -172,11 +168,9 @@ export default function Features() {
           </div>
           {/* Columna 2 */}
           <div className="w-full md:w-3/5">
-            <Image
+            <img
               className="w-full rounded"
-              src={comunidad}
-              width={800}
-              height={600}
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459546/comunidad_wtzxvl.jpg"
               alt="presencia"
             />
           </div>
@@ -184,11 +178,9 @@ export default function Features() {
 
         <div className="mt-10 flex md:flex-row flex-col">
           <div className="w-full md:w-3/5">
-            <Image
+            <img
               className="w-full  rounded"
-              src={transformacion}
-              width={900}
-              height={600}
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459541/transformacion_ivnujl.jpg"
               alt="poder"
             />
           </div>
