@@ -107,7 +107,7 @@ export default function Newsletter() {
                 <form className="w-full lg:w-auto">
                   <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
                     <a
-                      className="btn text-white bg-blue-600 hover:bg-blue-700 shadow"
+                      className="btn text-white bg-blue-600 hover:bg-blue-700 mb-6 shadow"
                       href="https://docs.google.com/forms/d/e/1FAIpQLScDeqUpcN1Vo4O3I_04FShMvJ2yZONyqfvVtyBVNU7TUgk2GQ/viewform">
                       Inscribirse
                     </a>
@@ -120,7 +120,7 @@ export default function Newsletter() {
                 <img
                   src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459523/logo_hdyh51.jpg"
                   alt="logo"
-                  className=" w-52 h-52 mr-14 border rounded-full"
+                  className=" md:w-52 md:h-52 hidden md:flex mr-14 border rounded-full"
                 />
               </Link>
             </div>

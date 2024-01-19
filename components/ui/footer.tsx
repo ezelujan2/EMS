@@ -1,46 +1,56 @@
+import { useState } from 'react'
 import Logo from './logo'
 
 export default function Footer() {
-  return (
+  const [sent, setSent] = useState(false)
+  const [message, setMessage] = useState('')
+
+  function handleSent(event : any) {
+    event?.preventDefault()
+    setSent(true)
+    setTimeout(()=> {
+      setSent(false)
+      setMessage('')
+    }, 6000)
+  }
+
+  function handleInput(event : any) {
+    setMessage(event.target.value)
+  }
+    return (
     <footer>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6  flex-row-reverse">
 
         {/* Top area: Blocks */}
-        <div className="grid sm:grid-cols-12 gap-40 py-8 md:py-12 border-t border-gray-200">
 
-          {/* 1st block */}
-          <div className="sm:col-span-12 lg:col-span-3">
-            <div className="mb-2">
-              <Logo />
-            </div>
-            <div className="text-sm text-gray-600">
-              <a href="#0" className="text-gray-600 hover:text-gray-900 hover:underline transition duration-150 ease-in-out">Terms</a> · <a href="#0" className="text-gray-600 hover:text-gray-900 hover:underline transition duration-150 ease-in-out">Privacy Policy</a>
-            </div>
+        {/* 1st block */}
+        <div className="flex md:flew-row flex-wrap  md:justify-start md:content-center  md:gap-60 gap-24 py-8 md:py-12 border-t border-gray-200">
+          <div className="sm:col-span-6 md:col-span-3 lg:col-span-3">
+            <h6 className="text-gray-800 font-medium mb-2">Contactanos</h6>
+            <p className="text-sm text-gray-600">Si tienes dudas o preguntas no dudes en escribirnos!</p>
+            <span className="text-xs text-gray-600 mb-4">No te olvides de dejarnos un canal de contacto</span>
+            <form>
+              <div className="flex flex-wrap mb-4">
+                <div className="w-full">
+                  <label className="block text-sm sr-only" htmlFor="newsletter">Mensaje</label>
+                  <div className="relative flex items-center max-w-xs">
+                    <textarea value={message} onChange={handleInput} id="newsletter"  className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm" placeholder="Tu mensaje..." required />
+                    <button onClick={handleSent} type="submit" className="absolute inset-0 left-auto" aria-label="Subscribe">
+                      <span className="absolute inset-0 right-auto w-px -ml-px my-2 bg-gray-300" aria-hidden="true"></span>
+                      <svg className="w-3 h-3 fill-current text-blue-600 mx-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
+                      </svg>
+                    </button>
+                  </div>
+                  {/* Success message */}
+                  { sent ? <p className="mt-2 text-green-600 text-sm">Recibimos tu consulta!</p> : ''}
+                  
+                </div>
+              </div>
+            </form>
           </div>
 
           {/* 2nd block */}
-          {/* <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
-            <h6 className="text-gray-800 font-medium mb-2">Products</h6>
-            <ul className="text-sm">
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Web Studio</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">DynamicBox Flex</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Programming Forms</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Integrations</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Command-line</a>
-              </li>
-            </ul>
-          </div> */}
-
-          {/* 3rd block */}
           <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
             <h6 className="text-gray-800 font-medium mb-2">Recursos</h6>
             <ul className="text-sm">
@@ -59,73 +69,33 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* 4th block */}
-          {/* <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
-            <h6 className="text-gray-800 font-medium mb-2">Company</h6>
-            <ul className="text-sm">
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Home</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">About us</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Company values</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Pricing</a>
-              </li>
-              <li className="mb-2">
-                <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Privacy Policy</a>
-              </li>
-            </ul>
-          </div> */}
-
-          {/* 5th block */}
-          <div className="sm:col-span-6 md:col-span-3 lg:col-span-3">
-            <h6 className="text-gray-800 font-medium mb-2">Contactanos</h6>
-            <p className="text-sm text-gray-600 mb-4">Si tienes dudas o preguntas no dudes en escribirnos!</p>
-            <form>
-              <div className="flex flex-wrap mb-4">
-                <div className="w-full">
-                  <label className="block text-sm sr-only" htmlFor="newsletter">Mensaje</label>
-                  <div className="relative flex items-center max-w-xs">
-                    <textarea id="newsletter"  className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm" placeholder="Tu mensaje..." required />
-                    <button type="submit" className="absolute inset-0 left-auto" aria-label="Subscribe">
-                      <span className="absolute inset-0 right-auto w-px -ml-px my-2 bg-gray-300" aria-hidden="true"></span>
-                      <svg className="w-3 h-3 fill-current text-blue-600 mx-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
-                      </svg>
-                    </button>
-                  </div>
-                  {/* Success message */}
-                  {/* <p className="mt-2 text-green-600 text-sm">Thanks for subscribing!</p> */}
-                </div>
-              </div>
-            </form>
+          {/* 3rd block */}
+          <div className="sm:col-span-12 lg:col-span-3">
+            <div className="mb-2">
+              <Logo />
+            </div>
+            <div className="text-sm text-gray-600">
+              <a href="#0" className="text-gray-600 hover:text-gray-900 hover:underline transition duration-150 ease-in-out">Terms</a> · <a href="#0" className="text-gray-600 hover:text-gray-900 hover:underline transition duration-150 ease-in-out">Privacy Policy</a>
+            </div>
           </div>
 
-        </div>
+          
 
+        </div>
         {/* Bottom area */}
         <div className="md:flex md:items-center md:justify-between py-4 md:py-8 border-t border-gray-200">
 
           {/* Social as */}
           <ul className="flex mb-4 md:order-1 md:ml-4 md:mb-0">
-            <li>
-              <a href="#0" className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out" aria-label="Twitter">
-                <svg className="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                  <path d="m13.063 9 3.495 4.475L20.601 9h2.454l-5.359 5.931L24 23h-4.938l-3.866-4.893L10.771 23H8.316l5.735-6.342L8 9h5.063Zm-.74 1.347h-1.457l8.875 11.232h1.36l-8.778-11.232Z" />
+
+          <li className="ml-4">
+              <a href="#0" className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out" aria-label="Facebook">
+                <svg className="w-8 h-8 fill-current" viewBox="0 -8 25 38" xmlns="http://www.w3.org/2000/svg">
+                <path  d="M11.9962 0.0078125C8.73824 0.0078125 8.32971 0.021622 7.05019 0.080003C5.77333 0.138241 4.90129 0.341051 4.13824 0.637622C3.34938 0.944146 2.68038 1.35434 2.01343 2.02124C1.34652 2.68819 0.936333 3.35719 0.629809 4.14605C0.333238 4.9091 0.130429 5.78115 0.0721905 7.058C0.0138095 8.33753 0 8.74605 0 12.0041C0 15.262 0.0138095 15.6705 0.0721905 16.9501C0.130429 18.2269 0.333238 19.099 0.629809 19.862C0.936333 20.6509 1.34652 21.3199 2.01343 21.9868C2.68038 22.6537 3.34938 23.0639 4.13824 23.3705C4.90129 23.667 5.77333 23.8698 7.05019 23.9281C8.32971 23.9864 8.73824 24.0002 11.9962 24.0002C15.2542 24.0002 15.6627 23.9864 16.9422 23.9281C18.2191 23.8698 19.0911 23.667 19.8542 23.3705C20.643 23.0639 21.312 22.6537 21.979 21.9868C22.6459 21.3199 23.0561 20.6509 23.3627 19.862C23.6592 19.099 23.862 18.2269 23.9202 16.9501C23.9786 15.6705 23.9924 15.262 23.9924 12.0041C23.9924 8.74605 23.9786 8.33753 23.9202 7.058C23.862 5.78115 23.6592 4.9091 23.3627 4.14605C23.0561 3.35719 22.6459 2.68819 21.979 2.02124C21.312 1.35434 20.643 0.944146 19.8542 0.637622C19.0911 0.341051 18.2191 0.138241 16.9422 0.080003C15.6627 0.021622 15.2542 0.0078125 11.9962 0.0078125ZM11.9962 2.16929C15.1993 2.16929 15.5788 2.18153 16.8437 2.23924C18.0133 2.29257 18.6485 2.488 19.0712 2.65229C19.6312 2.86991 20.0308 3.12986 20.4506 3.54967C20.8704 3.96943 21.1303 4.36905 21.348 4.929C21.5122 5.35172 21.7077 5.98691 21.761 7.15653C21.8187 8.42148 21.831 8.80091 21.831 12.0041C21.831 15.2071 21.8187 15.5866 21.761 16.8515C21.7077 18.0211 21.5122 18.6563 21.348 19.0791C21.1303 19.639 20.8704 20.0386 20.4506 20.4584C20.0308 20.8782 19.6312 21.1381 19.0712 21.3558C18.6485 21.5201 18.0133 21.7155 16.8437 21.7688C15.579 21.8265 15.1996 21.8388 11.9962 21.8388C8.79286 21.8388 8.41352 21.8265 7.14871 21.7688C5.97909 21.7155 5.3439 21.5201 4.92119 21.3558C4.36124 21.1381 3.96162 20.8782 3.54186 20.4584C3.1221 20.0386 2.8621 19.639 2.64448 19.0791C2.48019 18.6563 2.28476 18.0211 2.23143 16.8515C2.17371 15.5866 2.16148 15.2071 2.16148 12.0041C2.16148 8.80091 2.17371 8.42148 2.23143 7.15653C2.28476 5.98691 2.48019 5.35172 2.64448 4.929C2.8621 4.36905 3.12205 3.96943 3.54186 3.54967C3.96162 3.12986 4.36124 2.86991 4.92119 2.65229C5.3439 2.488 5.97909 2.29257 7.14871 2.23924C8.41367 2.18153 8.7931 2.16929 11.9962 2.16929ZM11.9962 16.0028C9.78776 16.0028 7.99748 14.2125 7.99748 12.0041C7.99748 9.79558 9.78776 8.00529 11.9962 8.00529C14.2047 8.00529 15.995 9.79558 15.995 12.0041C15.995 14.2125 14.2047 16.0028 11.9962 16.0028ZM11.9962 5.84381C8.594 5.84381 5.836 8.60181 5.836 12.0041C5.836 15.4062 8.594 18.1642 11.9962 18.1642C15.3984 18.1642 18.1564 15.4062 18.1564 12.0041C18.1564 8.60181 15.3984 5.84381 11.9962 5.84381ZM18.3998 7.03996C19.1949 7.03996 19.8394 6.39548 19.8394 5.60043C19.8394 4.80538 19.1949 4.16086 18.3998 4.16086C17.6048 4.16086 16.9603 4.80538 16.9603 5.60043C16.9603 6.39548 17.6048 7.03996 18.3998 7.03996Z" />
                 </svg>
               </a>
             </li>
-            <li className="ml-4">
-              <a href="#0" className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out" aria-label="Github">
-                <svg className="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 8.2c-4.4 0-8 3.6-8 8 0 3.5 2.3 6.5 5.5 7.6.4.1.5-.2.5-.4V22c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.7 3.9.3.4.6.9.6 1.6v2.2c0 .2.1.5.6.4 3.2-1.1 5.5-4.1 5.5-7.6-.1-4.4-3.7-8-8.1-8z" />
-                </svg>
-              </a>
-            </li>
+
             <li className="ml-4">
               <a href="#0" className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out" aria-label="Facebook">
                 <svg className="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -139,6 +109,7 @@ export default function Footer() {
           <div className="text-sm text-gray-600 mr-4">&copy; Cruip.com. All rights reserved.</div>
 
         </div>
+
 
       </div>
     </footer>
