@@ -8,7 +8,7 @@ export default function Logo() {
       <img
         src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459523/logo_hdyh51.jpg"
         alt="logo"
-        className="w-16 h-16 m-5 border rounded-full"
+        className="w-12 h-12 md:w-20 md:h-20 m-5 border rounded-full"
       />
     </Link>
   );

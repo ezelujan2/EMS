@@ -27,7 +27,7 @@ export default function Header() {
         !top ? "bg-blueEms-100 backdrop-blur-sm shadow-lg" : ""
       }`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between p-2 h-16 md:h-28">
           {/* Site branding */}
           <div className="shrink-0 mr-4">
             <Logo />

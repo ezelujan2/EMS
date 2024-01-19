@@ -26,8 +26,8 @@ export default function Home() {
       />
       <Features />
       {/* <FeaturesBlocks /> */}
-      {/* <Testimonials /> */}
-      {/* <Newsletter /> */}
+      <Testimonials />
+      <Newsletter />
     </>
   );
 }
