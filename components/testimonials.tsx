@@ -5,8 +5,10 @@ export default function Testimonials() {
   return (
     <section className="relative">
       <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 md:mt-32 mt-2">
-        <h2 className="h2 mb-4">Testimonios</h2>
-        <p className="text-xl text-gray-600" data-aos="zoom-y-out">
+        <h2 className="h2 mb-4 font-ems-normal">Testimonios</h2>
+        <p
+          className="text-xl text-gray-600 font-ems-light"
+          data-aos="zoom-y-out">
           Arcu cursus vitae congue mauris rhoncus viverra nibh cras pulvinar
           mattis blandit libero cursus mattis.
         </p>
@@ -64,14 +66,14 @@ export default function Testimonials() {
                   alt="Testimonial 01"
                 />
               </div>
-              <blockquote className="md:text-xl text-md md:text-md font-medium mb-4">
+              <blockquote className="md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique">
                 “ La Ems me enseño a poder relacionarme con el Espiritu Santo y
                 convertirlo en mi mejor amigo “
               </blockquote>
-              <cite className="block font-bold md:text-lg text-md not-italic mb-1">
+              <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
                 Flor Campagnolo
               </cite>
-              <div className="text-gray-600">
+              <div className="text-gray-600 font-ems-light">
                 <span>Alumnado Ems 2022</span>
               </div>
             </div>
@@ -97,16 +99,16 @@ export default function Testimonials() {
                   alt="Testimonial 01"
                 />
               </div>
-              <blockquote className="md:text-xl text-md md:text-md font-medium mb-4">
+              <blockquote className="md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique">
                 “ La Ems me enseño a poder relacionarme con el Espiritu Santo y
                 convertirlo en mi mejor amigo. La Ems me enseño a poder
                 relacionarme con el Espiritu Santo y convertirlo en mi mejor
                 amigo“{" "}
               </blockquote>
-              <cite className="block font-bold md:text-lg text-md not-italic mb-1">
+              <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
                 Flor Campagnolo
               </cite>
-              <div className="text-gray-600">
+              <div className="text-gray-600 font-ems-normal">
                 <span>Alumnado Ems 2022</span>
               </div>
             </div>
@@ -132,14 +134,14 @@ export default function Testimonials() {
                   alt="Testimonial 01"
                 />
               </div>
-              <blockquote className="md:text-xl text-md md:text-md font-medium mb-4">
+              <blockquote className="md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique">
                 “ La Ems me enseño a poder relacionarme con el Espiritu Santo y
                 convertirlo en mi mejor amigo “
               </blockquote>
-              <cite className="block font-bold md:text-lg text-md not-italic mb-1">
+              <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
                 Flor Campagnolo
               </cite>
-              <div className="text-gray-600">
+              <div className="text-gray-600 font-ems-normal">
                 <span>Alumnado Ems 2022</span>
               </div>
             </div>

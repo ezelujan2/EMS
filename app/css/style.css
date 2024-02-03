@@ -16,3 +16,33 @@
     }
 }
 
+@font-face {
+    font-family: 'articulatcf-light';
+    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'articulatcf-lightOblique';
+    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-LightOblique.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'articulatcf-bold';
+    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'articulatcf-normal';
+    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Normal.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Agrega otros @font-face según sea necesario */
+  

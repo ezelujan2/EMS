@@ -6,9 +6,9 @@ export default function Logo() {
   return (
     <Link href="/">
       <img
-        src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459523/logo_hdyh51.jpg"
+        src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1706960695/logo_j5zufy_kenlzd.png"
         alt="logo"
-        className="w-12 h-12 md:w-20 md:h-20 m-5 border rounded-full"
+        className="w-12 h-12 md:w-24 md:h-24 m-5  rounded-full"
       />
     </Link>
   );

@@ -37,8 +37,10 @@ export default function Features() {
         <div className="pt-12 md:pt-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="text-4xl md:text-7xl mb-4">Que es la EMS?</h1>
-            <p className="text-md md:text-xl text-gray-600">
+            <h1 className="text-4xl md:text-7xl mb-4 font-ems-normal">
+              Que es la EMS?
+            </h1>
+            <p className="text-md md:text-xl text-gray-600 font-ems-light">
               La identidad de la EMS, cada valor es un pilar de compromiso.
               Estos principios son más que palabras; son el núcleo de nuestra
               misión educativa.
@@ -49,10 +51,10 @@ export default function Features() {
           {/* Columna 1 */}
           <div className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center">
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
-              <h1 className="text-4xl md:text-5xl text-center mb-4">
+              <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
                 Presencia
               </h1>
-              <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start">
+              <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start font-ems-light">
                 Cultivar un ambiente donde cada persona se sienta valorada,
                 escuchada y conectada, reflejando así el amor y la atención a
                 Dios. Cultivar un ambiente donde cada persona se sienta
@@ -68,7 +70,6 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
-                  
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -101,8 +102,10 @@ export default function Features() {
           {/* Columna 2 */}
           <div className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center">
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
-              <h1 className="text-4xl md:text-5xl text-center">Poder</h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start">
+              <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
+                Poder
+              </h1>
+              <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start font-ems-light">
                 Guiando a cada estudiante hacia un camino de impacto y propósito
                 al servicio del Reino de Dios. Guiando a cada estudiante hacia
                 un camino de impacto y propósito al servicio del Reino de Dios.
@@ -119,7 +122,6 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
-                  
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -136,10 +138,10 @@ export default function Features() {
           {/* Columna 1 */}
           <div className="w-full md:w-2/5 mx-auto mb-4 md:mb-0 md:items-center flex items-center justify-center">
             <div className="rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5">
-              <h1 className="text-4xl md:text-5xl text-center mb-4">
+              <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
                 Comunidad
               </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
+              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
                 En comunidad las cosas se fortalecen cuando compartimos
                 propósitos y sueños. Juntos, construimos un camino sólido hacia
                 el crecimiento ministerial. En comunidad las cosas se fortalecen
@@ -155,7 +157,6 @@ export default function Features() {
                 className="mt-2 mx-auto text-center">
                 <path
                   fill-rule="evenodd"
-                  
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -186,10 +187,10 @@ export default function Features() {
           </div>
           <div className="w-11/12 m-2 md:m-0 md:w-2/5 flex justify-center items-center mx-4">
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 m-10">
-              <h1 className="text-4xl md:text-5xl text-center">
+              <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
                 Transformación
               </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
+              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
                 Somos transformados gracias a su sacrificio en la cruz,
                 conocerlo más nos ayuda a descubrirnos a nosotros mismos. Ser
                 transformados es abrazar nuestro llamado
@@ -203,7 +204,6 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
-                  
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -216,6 +216,7 @@ export default function Features() {
           </div>
         </div>
       </div>
+      <div id="testimonios" />
     </section>
   );
 }

@@ -48,14 +48,14 @@ export default function ModalVideo({
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
               <div className="max-w-3xl  mx-auto text-center pb-12 md:pb-16 z-0">
                 <h1
-                  className="text-2xl md:text-8xl md:flex hidden mb-12"
+                  className="text-2xl md:text-8xl md:flex hidden mb-12 font-ems-normal"
                   style={{ opacity: 1 }}>
                   El Reino de Dios se ha acercado
                 </h1>
                 <p
-                  className="md:flex hidden text-xl text-transparent text-white"
+                  className="md:flex hidden text-xl text-transparent text-white font-ems-light"
                   style={{ opacity: 1 }}>
-                  Comienza a experimentar su Reino! Donde la simpleza de Su
+                  Comienza a experimentar su Reino. Donde la simpleza de Su
                   Gracia ilumina nuestro camino. Descubre cómo el Reino está al
                   alcance de tu mano, experimenta la manifestación de la vida de
                   Cristo en cada uno y encuentra la plenitud como hijos en una

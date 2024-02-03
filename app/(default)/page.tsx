@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Home - Simple",
-  description: "Page description",
+  title: "Escuela de Minsiterio Sobrenatural",
+  description: "Pagina Oficial de la EMS",
 };
 
 import VideoThumb from "@/public/images/portada.jpg";

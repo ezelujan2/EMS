@@ -9,8 +9,9 @@ module.exports = {
     extend: {
       colors: {
         blueEms: {
-          100: "#2471ff",
+          100: "#2672ff",
         },
+        blackEms: '#262626',
         gray: {
           100: "#FBFBFB",
           200: "#EAEAEA",
@@ -65,6 +66,10 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
+        'ems-light': ['articulatcf-light', 'sans-serif'],
+        'ems-light-oblique': ['articulatcf-lightOblique', 'sans-serif'],
+        'ems-bold': ['articulatcf-bold', 'sans-serif'],
+        'ems-normal': ['articulatcf-normal', 'sans-serif']
       },
       fontSize: {
         xs: "0.75rem",

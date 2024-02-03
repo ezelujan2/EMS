@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed bg-blueEms-100 w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
+      className={`fixed bg-blueEms-100 w-full z-30 md:bg-opacity-100 transition duration-300 ease-in-out ${
         !top ? "bg-blueEms-100 backdrop-blur-sm shadow-lg" : ""
       }`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
@@ -39,15 +39,15 @@ export default function Header() {
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
-                  href="/signin"
-                  className="font-medium text-white hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+                  href="#contact"
+                  className="font-medium text-blackEms hover:text-white px-5 py-3 flex items-center transition duration-150 ease-in-out">
                   Contactanos
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/signup"
-                  className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
+                  href="#inscript"
+                  className="btn-sm text-gray-200 bg-blackEms hover:bg-gray-800 ml-3">
                   <span>Inscribite</span>
                   <svg
                     className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1"
