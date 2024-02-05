@@ -14,6 +14,8 @@ const inter = Inter({
 export const metadata = {
   title: "Escuela de ministerio Sobrenatural",
   description: "Pagina Oficial de la escuela de ministerio sobrenatural",
+  keywords:
+    "escuela, ministerio, sobrenatural, iglesia, profecia, presencia, sanidad",
 };
 
 export default function RootLayout({
