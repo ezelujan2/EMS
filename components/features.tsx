@@ -8,7 +8,7 @@ export default function Features() {
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const videoDani="/videos/Dani.mp4"
+  // const videoDani="/videos/Dani.mp4"
   const videoEze='/videos/Eze.mp4'
   const videoPatri='/videos/Patri.mp4'
   const videoFlor='/videos/Flor.mp4'
@@ -218,7 +218,7 @@ export default function Features() {
                   height={videoHeight}
                   loop
                   controls>
-                  <source src={videoDani} type="video/mp4" />
+                  <source src="https://res.cloudinary.com/dmoqzhgjk/video/upload/v1708378367/02._Dani_dx2iai.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </Dialog.Panel>
