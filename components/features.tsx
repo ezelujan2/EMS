@@ -2,18 +2,31 @@
 
 import { useState, useRef, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import Image from "next/image";
+import FeaturesBg from "@/public/images/features-bg.png";
+import FeaturesElement from "@/public/images/features-element.png";
+import presencia from "../public/images/presencia.jpg";
+import transformacion from "../public/images/transformacion.jpg";
+import poder from "../public/images/poder.jpg";
+import comunidad from "../public/images/comunidad.jpg";
+import classNames from "classnames";
 
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  // const videoDani="/videos/Dani.mp4"
-  const videoEze='/videos/Eze.mp4'
-  const videoPatri='/videos/Patri.mp4'
-  const videoFlor='/videos/Flor.mp4'
-  const videoWidth=1920
-  const videoHeight=1080
+
+  const width = "100%";
+  const height = "75vw";
+
+        
+        const thumbWidth=768
+        const thumbHeight=432
+        const thumbAlt="Modal video thumbnail"
+        const video="/videos/Dani.mp4"
+        const videoWidth=1920
+        const videoHeight=1080
 
   const tabs = useRef<HTMLDivElement>(null);
 
@@ -61,11 +74,8 @@ export default function Features() {
                 más de su bondad, de su belleza, de quién es Él. Mientras más lo
                 conocemos, más experimentamos su verdad y su cercanía.
               </div>
-              <a onClick={() => {
-              setModalOpen(true);
-            }}>
               <svg
-                className="mt-2"
+                className="mt-2 mx-auto md:mx-0"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -81,53 +91,6 @@ export default function Features() {
                   fill="currentColor"
                 />
               </svg>
-              
-              </a >
-              <Transition
-        show={modalOpen}
-        as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src={videoEze} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
             </div>
           </div>
           {/* Columna 2 */}
@@ -218,7 +181,7 @@ export default function Features() {
                   height={videoHeight}
                   loop
                   controls>
-                  <source src="https://res.cloudinary.com/dmoqzhgjk/video/upload/v1708378367/02._Dani_dx2iai.mp4" type="video/mp4" />
+                  <source src={video} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </Dialog.Panel>
@@ -244,16 +207,13 @@ export default function Features() {
                 donde Él se encarna en la manifestación de su cuerpo y podemos
                 ver la simpleza de la gracia y el poder de la vulnerabilidad.
               </div>
-              <a onClick={() => {
-              setModalOpen(true);
-            }}>
               <svg
-                className="mt-2"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+                className="mt-2 mx-auto text-center">
                 <path
                   fillRule="evenodd"
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
@@ -264,52 +224,6 @@ export default function Features() {
                   fill="currentColor"
                 />
               </svg>
-              </a >
-              <Transition
-        show={modalOpen}
-        as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src={videoFlor} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
             </div>
           </div>
           {/* Columna 2 */}
@@ -342,9 +256,6 @@ export default function Features() {
                 vivir en una plena comunión con el Padre. El siempre nos lleva
                 al diseño original.
               </div>
-              <a onClick={() => {
-              setModalOpen(true);
-            }}>
               <svg
                 className="mt-2"
                 width="24"
@@ -362,52 +273,6 @@ export default function Features() {
                   fill="currentColor"
                 />
               </svg>
-              </a >
-              <Transition
-        show={modalOpen}
-        as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src={videoPatri} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
             </div>
           </div>
         </div>
