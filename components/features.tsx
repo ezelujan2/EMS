@@ -24,7 +24,7 @@ export default function Features() {
         const thumbWidth=768
         const thumbHeight=432
         const thumbAlt="Modal video thumbnail"
-        const video="/videos/Dani.mp4"
+        const video="/videos/Patri.mp4"
         const videoWidth=1920
         const videoHeight=1080
 
