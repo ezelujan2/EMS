@@ -129,9 +129,9 @@ export default function Footer() {
               Si tienes dudas o preguntas, ¡no dudes en escribirnos!
             </p>
             <span className="text-xs text-gray-600 mb-4">
-              No te olvides de dejarnos un canal de contacto
+              Escribenos a escuelaems@gmail.com
             </span>
-            <form>
+            {/* <form>
               <div className="flex flex-wrap mb-4">
                 <div className="w-full">
                   <input
@@ -187,7 +187,7 @@ export default function Footer() {
                   )}
                 </div>
               </div>
-            </form>
+            </form> */}
           </div>
           <div className="">
             <ul className="text-sm">

@@ -155,7 +155,7 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459547/poder_nro5cd.jpg"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459541/transformacion_ivnujl.jpg"
               alt="poder"
             />
           </div>
@@ -337,7 +337,7 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full  rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459541/transformacion_ivnujl.jpg"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459547/poder_nro5cd.jpg"
               alt="poder"
             />
           </div>
