@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Transition } from "@headlessui/react";
+import { useState, useRef, useEffect, Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import FeaturesBg from "@/public/images/features-bg.png";
 import FeaturesElement from "@/public/images/features-element.png";
@@ -13,6 +13,20 @@ import classNames from "classnames";
 
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
+
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const width = "100%";
+  const height = "75vw";
+
+        
+        const thumbWidth=768
+        const thumbHeight=432
+        const thumbAlt="Modal video thumbnail"
+        const video="/videos/Dani.mp4"
+        const videoWidth=1920
+        const videoHeight=1080
 
   const tabs = useRef<HTMLDivElement>(null);
 
@@ -38,12 +52,12 @@ export default function Features() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h1 className="text-4xl md:text-7xl mb-4 font-ems-normal">
-              Que es la EMS?
+              Qué es la EMS?
             </h1>
             <p className="text-md md:text-xl text-gray-600 font-ems-light">
-              La identidad de la EMS, cada valor es un pilar de compromiso.
+              La identidad de la EMS. Cada valor es un pilar de compromiso.
               Estos principios son más que palabras; son el núcleo de nuestra
-              misión educativa.
+              misión como escuela.
             </p>
           </div>
         </div>
@@ -55,11 +69,10 @@ export default function Features() {
                 Presencia
               </h1>
               <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start font-ems-light">
-                Cultivar un ambiente donde cada persona se sienta valorada,
-                escuchada y conectada, reflejando así el amor y la atención a
-                Dios. Cultivar un ambiente donde cada persona se sienta
-                valorada, escuchada y conectada, reflejando así el amor y la
-                atención a Dios.
+                Honramos la presencia de Dios y buscamos cultivar ambientes
+                donde Él sea el centro. En ese lugar lo conocemos y descubrimos
+                más de su bondad, de su belleza, de quién es Él. Mientras más lo
+                conocemos, más experimentamos su verdad y su cercanía.
               </div>
               <svg
                 className="mt-2 mx-auto md:mx-0"
@@ -69,7 +82,7 @@ export default function Features() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -107,12 +120,13 @@ export default function Features() {
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start font-ems-light">
                 Guiando a cada estudiante hacia un camino de impacto y propósito
-                al servicio del Reino de Dios. Guiando a cada estudiante hacia
-                un camino de impacto y propósito al servicio del Reino de Dios.
-                Guiando a cada estudiante hacia un camino de impacto y propósito
-                al servicio del Reino de Dios. Guiando a cada estudiante hacia
-                un camino de impacto y propósito al servicio del Reino de Dios.
+                al servicio del Reino de Dios, porque el evangelio son buenas
+                nuevas, y esas buenas nuevas, no vienen separadas de su poder.
+                Fuimos creados para vivir una vida sobrenatural.
               </div>
+              <a onClick={() => {
+              setModalOpen(true);
+            }}>
               <svg
                 className="mt-2"
                 width="24"
@@ -121,7 +135,7 @@ export default function Features() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -130,6 +144,52 @@ export default function Features() {
                   fill="currentColor"
                 />
               </svg>
+              </a >
+              <Transition
+        show={modalOpen}
+        as={Fragment}
+        afterEnter={() => videoRef.current?.play()}>
+        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
+          {/* Modal backdrop */}
+          <Transition.Child
+            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition ease-out duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            aria-hidden="true"
+          />
+          {/* End: Modal backdrop */}
+
+          {/* Modal dialog */}
+          <Transition.Child
+            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ttransition ease-out duration-200"
+            leaveFrom="oopacity-100 scale-100"
+            leaveTo="opacity-0 scale-95">
+            <div className="max-w-6xl mx-auto h-full flex items-center">
+              <Dialog.Panel className="w-[100vh] max-h-[100vh] bg-black overflow-hidden">
+                <video
+                className="max-w-full h-[100vh]"
+                  ref={videoRef}
+                  width={videoWidth}
+                  height={videoHeight}
+                  loop
+                  controls>
+                  <source src={video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </Dialog.Panel>
+            </div>
+          </Transition.Child>
+          {/* End: Modal dialog */}
+        </Dialog>
+              </Transition>
             </div>
           </div>
         </div>
@@ -142,11 +202,10 @@ export default function Features() {
                 Comunidad
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
-                En comunidad las cosas se fortalecen cuando compartimos
-                propósitos y sueños. Juntos, construimos un camino sólido hacia
-                el crecimiento ministerial. En comunidad las cosas se fortalecen
-                cuando compartimos propósitos y sueños. Juntos, construimos un
-                camino sólido hacia el crecimiento ministerial.
+                Fuimos creados para vivir en su cuerpo, la iglesia. La familia y
+                comunidad, donde somos conocidos y podemos conocer más a Jesús,
+                donde Él se encarna en la manifestación de su cuerpo y podemos
+                ver la simpleza de la gracia y el poder de la vulnerabilidad.
               </div>
               <svg
                 width="24"
@@ -156,7 +215,7 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg"
                 className="mt-2 mx-auto text-center">
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
                   fill="currentColor"
                 />
@@ -191,9 +250,11 @@ export default function Features() {
                 Transformación
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
-                Somos transformados gracias a su sacrificio en la cruz,
-                conocerlo más nos ayuda a descubrirnos a nosotros mismos. Ser
-                transformados es abrazar nuestro llamado
+                Mientras más conocemos a Dios, más conocemos quienes somos
+                nosotros como hijos. En su presencia somos transformados a la
+                imagen de Jesús, el Hijo, que nos mostró lo que de verdad era
+                vivir en una plena comunión con el Padre. El siempre nos lleva
+                al diseño original.
               </div>
               <svg
                 className="mt-2"

@@ -59,11 +59,11 @@ export default async function Hero() {
                   className="text-xl text-gray-600 mb-8 font-ems-light"
                   data-aos="zoom-y-out"
                   data-aos-delay="150">
-                  La EMS escuela de ministerio sobrenatural de Rosario, ofrece
-                  herramientas para poder fluir en los dones y capacitación
-                  práctica en profecía, sanidad, etc. <br />
-                  Donde cada estudiante aprenderá la cultura del reino, caminar
-                  en autoridad, y a manifestar el poder de Dios.
+                  Nuestra misión es formar a los creyentes en su identidad como
+                  hijos de un buen Padre, y como resultado de esta relación,
+                  puedan co-participar con Él en la manifestación de su reino en
+                  cada lugar donde se muevan.
+                  <br />
                 </p>
                 <div
                   className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"

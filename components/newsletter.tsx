@@ -98,11 +98,11 @@ export default function Newsletter() {
               {/* CTA content */}
               <div className="text-center lg:text-left lg:max-w-xl">
                 <h3 className="h3 text-white mb-2 font-ems-normal">
-                  Quieres ser parte de la EMS?
+                  Queres ser parte de la EMS?
                 </h3>
                 <p className="text-gray-300 text-lg mb-6 font-ems-light">
-                  Inscribite y convertirte en el avivador que Flor Campagnolo
-                  es!
+                  Inscribite y convertirte en el avivador que fuiste creado para
+                  ser!
                 </p>
 
                 {/* CTA form */}

@@ -55,11 +55,10 @@ export default function ModalVideo({
                 <p
                   className="md:flex hidden text-xl text-transparent text-white font-ems-light"
                   style={{ opacity: 1 }}>
-                  Comienza a experimentar su Reino. Donde la simpleza de Su
-                  Gracia ilumina nuestro camino. Descubre cómo el Reino está al
-                  alcance de tu mano, experimenta la manifestación de la vida de
-                  Cristo en cada uno y encuentra la plenitud como hijos en una
-                  relación correcta con el Padre.
+                  Comienza a experimentar el reino de Dios, donde la simpleza de
+                  Su Gracia pone el Reino al alcance de tu mano. Experimenta la
+                  manifestación de la vida de Cristo y encuentra la plenitud
+                  como hijo, en una relación correcta con el Padre.
                 </p>
               </div>
             </div>

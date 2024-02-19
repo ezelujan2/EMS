@@ -134,6 +134,18 @@ export default function Footer() {
             <form>
               <div className="flex flex-wrap mb-4">
                 <div className="w-full">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Nombre"
+                    className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm mb-2"
+                  />
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="Correo"
+                    className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm mb-2"
+                  />
                   <label className="block text-sm sr-only" htmlFor="newsletter">
                     Mensaje
                   </label>

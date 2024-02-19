@@ -27,13 +27,14 @@ export default function Home() {
         <meta property="og:image:width" content="500" />
         <meta property="og:image:height" content="400" />
       </head>
+
       <Hero />
       <ModalVideo
         thumb={VideoThumb}
         thumbWidth={768}
         thumbHeight={432}
         thumbAlt="Modal video thumbnail"
-        video="/videos/video.mp4"
+        video="/videos/Dani.mp4"
         videoWidth={1920}
         videoHeight={1080}
       />
