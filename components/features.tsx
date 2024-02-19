@@ -4,10 +4,17 @@ import { useState, useRef, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Features() {
-  const [tab, setTab] = useState<number>(1);
+  // const [tab, setTab] = useState<number>(1);
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [modalOpen1, setModalOpen1] = useState<boolean>(false);
+  const [modalOpen2, setModalOpen2] = useState<boolean>(false);
+  const [modalOpen3, setModalOpen3] = useState<boolean>(false);
+  const [modalOpen4, setModalOpen4] = useState<boolean>(false);
+
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
+  const videoRef3 = useRef<HTMLVideoElement>(null);
+  const videoRef4 = useRef<HTMLVideoElement>(null);
 
   const width = "100%";
   const height = "75vw";
@@ -16,10 +23,6 @@ export default function Features() {
         const thumbWidth=768
         const thumbHeight=432
         const thumbAlt="Modal video thumbnail"
-        const videoPatri="/videos/Patri.mp4"
-        const videoFlor="/videos/Flor.mp4"
-        const videoEze="/videos/Eze.mp4"
-        const videoDani="/videos/Dani.mp4"
         const videoWidth=1920
         const videoHeight=1080
 
@@ -70,7 +73,7 @@ export default function Features() {
                 conocemos, más experimentamos su verdad y su cercanía.
               </div>
               <a onClick={() => {
-              setModalOpen(true);
+              setModalOpen1(true);
             }}>
               <svg
                 className="mt-2"
@@ -91,10 +94,10 @@ export default function Features() {
               </svg>
               </a >
               <Transition
-        show={modalOpen}
+        show={modalOpen1}
         as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
+        afterEnter={() => videoRef1.current?.play()}>
+        <Dialog initialFocus={videoRef1} onClose={() => setModalOpen1(false)}>
           {/* Modal backdrop */}
           <Transition.Child
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
@@ -121,12 +124,12 @@ export default function Features() {
               <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
                 <video
                 className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
+                  // ref={videoRef}
                   width={videoWidth}
                   height={videoHeight}
                   loop
                   controls>
-                  <source src={videoEze} type="video/mp4" />
+                  <source src="/videos/Eze.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </Dialog.Panel>
@@ -169,7 +172,7 @@ export default function Features() {
                 Fuimos creados para vivir una vida sobrenatural.
               </div>
               <a onClick={() => {
-              setModalOpen(true);
+              setModalOpen2(true);
             }}>
               <svg
                 className="mt-2"
@@ -190,10 +193,10 @@ export default function Features() {
               </svg>
               </a >
               <Transition
-        show={modalOpen}
+        show={modalOpen2}
         as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
+        afterEnter={() => videoRef2.current?.play()}>
+        <Dialog initialFocus={videoRef2} onClose={() => setModalOpen2(false)}>
           {/* Modal backdrop */}
           <Transition.Child
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
@@ -220,12 +223,12 @@ export default function Features() {
               <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
                 <video
                 className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
+                  ref={videoRef2}
                   width={videoWidth}
                   height={videoHeight}
                   loop
                   controls>
-                  <source src={videoDani} type="video/mp4" />
+                  <source src="/videos/Dani.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </Dialog.Panel>
@@ -252,10 +255,10 @@ export default function Features() {
                 ver la simpleza de la gracia y el poder de la vulnerabilidad.
               </div>
               <a onClick={() => {
-              setModalOpen(true);
+              setModalOpen3(true);
             }}>
               <svg
-                className="mt-2"
+                className="mt-2 m-auto"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -273,10 +276,10 @@ export default function Features() {
               </svg>
               </a >
               <Transition
-        show={modalOpen}
+        show={modalOpen3}
         as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
+        afterEnter={() => videoRef3.current?.play()}>
+        <Dialog initialFocus={videoRef3} onClose={() => setModalOpen3(false)}>
           {/* Modal backdrop */}
           <Transition.Child
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
@@ -303,12 +306,12 @@ export default function Features() {
               <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
                 <video
                 className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
+                  ref={videoRef3}
                   width={videoWidth}
                   height={videoHeight}
                   loop
                   controls>
-                  <source src={videoFlor} type="video/mp4" />
+                  <source src="/videos/Flor.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </Dialog.Panel>
@@ -351,7 +354,7 @@ export default function Features() {
                 al diseño original.
               </div>
               <a onClick={() => {
-              setModalOpen(true);
+              setModalOpen4(true);
             }}>
               <svg
                 className="mt-2"
@@ -372,10 +375,10 @@ export default function Features() {
               </svg>
               </a >
               <Transition
-        show={modalOpen}
+        show={modalOpen4}
         as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
+        afterEnter={() => videoRef4.current?.play()}>
+        <Dialog initialFocus={videoRef4} onClose={() => setModalOpen4(false)}>
           {/* Modal backdrop */}
           <Transition.Child
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
@@ -402,12 +405,12 @@ export default function Features() {
               <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
                 <video
                 className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef}
+                  ref={videoRef4}
                   width={videoWidth}
                   height={videoHeight}
                   loop
                   controls>
-                  <source src={videoPatri} type="video/mp4" />
+                  <source src="/videos/Patri.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </Dialog.Panel>
