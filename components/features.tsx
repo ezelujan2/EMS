@@ -173,9 +173,9 @@ export default function Features() {
             leaveFrom="oopacity-100 scale-100"
             leaveTo="opacity-0 scale-95">
             <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="w-[100vh] max-h-[100vh] bg-black overflow-hidden">
+              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[90vh] w-[90vh] bg-black overflow-hidden">
                 <video
-                className="max-w-full h-[100vh]"
+                className="md:w-[100vh] md:max-h-[100vh] max-h-[90vh] w-[90vh]"
                   ref={videoRef}
                   width={videoWidth}
                   height={videoHeight}
