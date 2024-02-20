@@ -67,8 +67,10 @@ export default function Testimonials() {
                 />
               </div>
               <blockquote className="md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique">
-                “ La Ems me enseño a poder relacionarme con el Espiritu Santo y
-                convertirlo en mi mejor amigo “
+                “ A mi me paso que en la EMS siento que llegue a conocer muchísimo más a Jesús. Y entendí que eso implica tener una relación con El. Lo cual es hermoso y esta disponible para todos, y todo el tiempo.
+Descubrí un amor que nunca imaginé. Una relación tan hermosa que transformo mi vida por completo. Entendí por fin a que se refieren cuando dicen “nacer de nuevo”, siento que antes vivía, pero no estaba realmente “viva”, y ahora sí. 
+Tuve la posibilidad de tener mucho más tiempo de intimidad con El. Pasar tiempo juntos es lo que fue haciendo un trabajo profundo en mí. Estar en su presencia es lo que más me empezó a alimentar, a sanar y a llenar. Entendí que nada se compara. 
+Hacía tiempo había recibido una palabra, que decía que yo iba a ser como un árbol plantado a la orilla del rio, no temerá cuando venga el calor y sus hojas estarán verdes, no se angustiara en año de sequía y siempre dará frutos. Y así siento que fue, siento que fue un año de echar raíces profundas con El y afirmarme en su amor. “
               </blockquote>
               <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
                 Flor Campagnolo
