@@ -1,52 +1,42 @@
 "use client";
+import { useState } from "react";
 
-import { useState, useRef, Fragment } from "react";
-import type { StaticImageData } from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
-import Image from "next/image";
+export default function ModalVideo() {
+  const [index, setIndex] = useState(0);
 
-interface ModalVideoProps {
-  thumb: StaticImageData;
-  thumbWidth: number;
-  thumbHeight: number;
-  thumbAlt: string;
-  video: string;
-  videoWidth: number;
-  videoHeight: number;
-}
+  const images = [
+    "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708988701/_DSC0891_qzcl2f.jpg",
+    "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708989208/DSC_3841_eyfcmj.jpg",
+    "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708988699/_DSC4846_uujffe.jpg",
+    "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708988776/DSC_4095_ibovtl.jpg",
+  ];
 
-export default function ModalVideo({
-  thumb,
-  thumbWidth,
-  thumbHeight,
-  thumbAlt,
-  video,
-  videoWidth,
-  videoHeight,
-}: ModalVideoProps) {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  function increaseIndex() {
+    if (index === images.length - 1) setIndex(0);
+    else setIndex(index + 1);
+  }
 
-  const width = "100%";
-  const height = "75vw";
+  function decreaseIndex() {
+    if (index === 0) setIndex(images.length - 1);
+    else setIndex(index - 1);
+  }
 
   return (
-    <div>
-      {/* Video thumbnail */}
-      <div className="w-full">
-        <div
-          className="relative flex justify-center mb-8 w-full"
-          data-aos="zoom-y-out"
-          data-aos-delay="450">
-          <div className="flex flex-col justify-center items-center">
-            <img
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459527/portada_jxbioo.jpg"
-              className="h-full md:h-full w-full opacity-95"
-              alt={thumbAlt}
-            />
-            {/* Content */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
-              <div className="max-w-3xl  mx-auto text-center pb-12 md:pb-16 z-0">
+    <div className="w-full">
+      <div
+        className="relative flex justify-center mb-8 w-full"
+        data-aos="zoom-y-out"
+        data-aos-delay="450">
+        <div className="flex flex-col justify-center items-center">
+          <img
+            src={images[index]}
+            className="h-full md:h-full w-full opacity-95"
+            alt={"thumbAlt"}
+          />
+          {/* Content */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+            {index === 0 ? (
+              <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 z-0">
                 <h1
                   className="text-2xl md:text-8xl md:flex hidden mb-12 font-ems-normal"
                   style={{ opacity: 1 }}>
@@ -61,73 +51,60 @@ export default function ModalVideo({
                   como hijo, en una relación correcta con el Padre.
                 </p>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
-          <button
-            className="absolute top-full flex items-center transform -translate-y-1/2 bg-white rounded-full font-medium group p-4 shadow-lg"
-            onClick={() => {
-              setModalOpen(true);
-            }}>
-            <svg
-              className="w-6 h-6 fill-current text-gray-400 group-hover:text-blue-600 shrink-0 mt-2"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0 2C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12z" />
-              <path d="M10 17l6-5-6-5z" />
-            </svg>
-
-            <span className="text-sm md:text-xl ml-3">
-              Ver video completo (2 min)
-            </span>
-          </button>
+          {/* Arrows */}
+          <div className="absolute bg-gray-200 opacity-30 border rounded-l hover:bg-white hover:opacity-100 top-1/2 right-1">
+            <button onClick={increaseIndex} type="button" className="w-24 h-24">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    d="M9 6L15 12L9 18"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>{" "}
+                </g>
+              </svg>
+            </button>
+          </div>
+          <div className="absolute bg-gray-200 opacity-30 border rounded-l hover:bg-white hover:opacity-100 top-1/2 left-1">
+            <button onClick={decreaseIndex} type="button" className="w-24 h-24">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    d="M15 6L9 12L15 18"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>{" "}
+                </g>
+              </svg>
+            </button>
+          </div>
+          {/* End: Arrows */}
         </div>
       </div>
-      {/* End: Video thumbnail */}
-
-      <Transition
-        show={modalOpen}
-        as={Fragment}
-        afterEnter={() => videoRef.current?.play()}>
-        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="w-full max-h-full aspect-video bg-black overflow-hidden">
-                <video
-                  ref={videoRef}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src={video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-      </Transition>
     </div>
   );
 }

@@ -1,48 +1,59 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
 
 /* Additional styles */
-@import 'additional-styles/utility-patterns.css';
-@import 'additional-styles/range-slider.css';
-@import 'additional-styles/toggle-switch.css';
-@import 'additional-styles/theme.css';
+@import "additional-styles/utility-patterns.css";
+@import "additional-styles/range-slider.css";
+@import "additional-styles/toggle-switch.css";
+@import "additional-styles/theme.css";
 
-@import 'tailwindcss/utilities';
+@import "tailwindcss/utilities";
 
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
-    .rtl {
-        direction: rtl;
-    }
+  .rtl {
+    direction: rtl;
+  }
 }
 
 @font-face {
-    font-family: 'articulatcf-light';
-    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Light.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: "articulatcf-light";
+  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Light.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
 
-  @font-face {
-    font-family: 'articulatcf-lightOblique';
-    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-LightOblique.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  @font-face {
-    font-family: 'articulatcf-bold';
-    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Bold.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
+@font-face {
+  font-family: "articulatcf-lightOblique";
+  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-LightOblique.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
 
-  @font-face {
-    font-family: 'articulatcf-normal';
-    src: url('../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Normal.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  /* Agrega otros @font-face según sea necesario */
-  
+@font-face {
+  font-family: "articulatcf-bold";
+  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Bold.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "articulatcf-normal";
+  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Normal.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+blockquote {
+  max-height: 9rem;
+  overflow: hidden;
+  transition: max-height 1.4s ease; /* Define la duración y la función de temporización de la transición */
+}
+
+blockquote.expanded {
+  max-height: 100rem; /* O la altura máxima que desees */
+}
