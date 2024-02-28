@@ -144,7 +144,7 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459548/presencia_w73zfs.jpg"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1705459548/presencia_w73zfs.jpg"
               alt="presencia"
             />
           </div>
@@ -155,7 +155,7 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459541/transformacion_ivnujl.jpg"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1705459541/transformacion_ivnujl.jpg"
               alt="poder"
             />
           </div>
@@ -327,7 +327,7 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1709131521/_DSC4964_1_ttgkfk.jpg"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1709131521/_DSC4964_1_ttgkfk.jpg"
               alt="comunidad"
             />
           </div>
@@ -337,8 +337,8 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full  rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459547/poder_nro5cd.jpg"
-              alt="poder"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1705459547/poder_nro5cd.jpg"
+              alt="Transformacion"
             />
           </div>
           <div className="w-11/12 m-2 md:m-0 md:w-2/5 flex justify-center items-center mx-4">
