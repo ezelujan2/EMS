@@ -38,7 +38,7 @@ export default async function Hero() {
           <div className="pt-32 pb-12 md:pt-40 md:pb-20">
             {/* Section header */}
             <div className="text-center pb-12 md:pb-16">
-              <h1
+              {/* <h1
                 className="text-5xl md:text-6xl font-extrabold font-ems-normal leading-tighter tracking-tighter mb-4"
                 data-aos="zoom-y-out">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
@@ -53,6 +53,11 @@ export default async function Hero() {
                   S
                 </span>
                 obrenatural
+              </h1> */}
+              <h1
+                className="text-5xl md:text-6xl font-extrabold font-ems-normal text-blueEms-100 leading-tighter tracking-tighter mb-4"
+                data-aos="zoom-y-out">
+                  Escuela de Ministerio Sobrenatural
               </h1>
               <div className="max-w-3xl mx-auto">
                 <p

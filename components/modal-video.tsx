@@ -56,8 +56,8 @@ export default function ModalVideo() {
             )}
           </div>
           {/* Arrows */}
-          <div className="absolute bg-gray-200 opacity-30 border rounded-l hover:bg-white hover:opacity-100 top-1/2 right-1">
-            <button onClick={increaseIndex} type="button" className="w-24 h-24">
+          <div className="absolute bg-gray-200 opacity-30 border rounded-l hover:bg-white hover:opacity-100 top-1/4 md:top-1/2 right-1">
+            <button onClick={increaseIndex} type="button" className="w-14 h-14 md:w-24 md:h-24">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -79,8 +79,8 @@ export default function ModalVideo() {
               </svg>
             </button>
           </div>
-          <div className="absolute bg-gray-200 opacity-30 border rounded-l hover:bg-white hover:opacity-100 top-1/2 left-1">
-            <button onClick={decreaseIndex} type="button" className="w-24 h-24">
+          <div className="absolute bg-gray-200 opacity-30 border rounded-l hover:bg-white hover:opacity-100 top-1/4 md:top-1/2 left-1">
+            <button onClick={decreaseIndex} type="button" className="w-14 h-14 md:w-24 md:h-24">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
