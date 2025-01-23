@@ -110,7 +110,7 @@ export default function Newsletter() {
                   <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
                     <a
                       className="btn text-white bg-blue-600 hover:bg-blue-700 mb-6 shadow font-ems-normal"
-                      href="https://docs.google.com/forms/d/e/1FAIpQLScDeqUpcN1Vo4O3I_04FShMvJ2yZONyqfvVtyBVNU7TUgk2GQ/viewform">
+                      href="https://docs.google.com/forms/d/1I6NupCumjjwil9HVju7acomNIy0GCRcZC14mvHGRbZI/prefill">
                       Inscribirse
                     </a>
                   </div>

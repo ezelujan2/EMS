@@ -20,107 +20,6 @@ export default function Footer() {
   return (
     <footer>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex-col md:flex-row font-ems-normal">
-        {/* Top area: Blocks */}
-        {/* <div className="flex flex-col md:flex-row md:justify-between md:items-center md:space-between md:gap-8 py-8 md:py-12 border-t border-gray-200">
-          <div className="md:w-1/3">
-            <h6 className="text-gray-800 font-medium mb-2 ">Contactanos</h6>
-            <p className="text-sm text-gray-600">
-              Si tienes dudas o preguntas, ¡no dudes en escribirnos!
-            </p>
-            <span className="text-xs text-gray-600 mb-4">
-              No te olvides de dejarnos un canal de contacto
-            </span>
-            <form>
-              <div className="flex flex-wrap mb-4">
-                <div className="w-full">
-                  <label className="block text-sm sr-only" htmlFor="newsletter">
-                    Mensaje
-                  </label>
-                  <div className="relative flex items-center max-w-xs">
-                    <textarea
-                      value={message}
-                      onChange={handleInput}
-                      id="newsletter"
-                      className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm"
-                      placeholder="Tu mensaje..."
-                      required
-                    />
-                    <button
-                      onClick={handleSent}
-                      type="submit"
-                      className="absolute inset-0 left-auto"
-                      aria-label="Subscribe">
-                      <span
-                        className="absolute inset-0 right-auto w-px -ml-px my-2 bg-gray-300"
-                        aria-hidden="true"></span>
-                      <svg
-                        className="w-3 h-3 fill-current text-blue-600 mx-3 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                          fillRule="nonzero"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {sent ? (
-                    <p className="mt-2 text-green-600 text-sm">
-                      Recibimos tu consulta!
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div className="md:w-1/3 flex  justify-center items-center mt-6 md:mt-0">
-            <ul className="text-sm">
-              <li className="mb-2">
-                <h6 className="text-gray-800 h6 underline font-medium mb-2">
-                  Recursos
-                </h6>
-              </li>
-              <li className="mb-2">
-                <a
-                  href="#0"
-                  className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
-                  Inscripcion
-                </a>
-              </li>
-              <li className="mb-2">
-                <a
-                  href="#0"
-                  className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
-                  Nuestros Valores
-                </a>
-              </li>
-              <li className="mb-2">
-                <a
-                  href="#0"
-                  className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
-                  Que es la EMS?
-                </a>
-              </li>
-              <li className="mb-2">
-                <a
-                  href="#0"
-                  className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
-                  Video
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:w-1/3 flex justify-end">
-            <div className="mb-2">
-              <Logo />
-            </div>
-          </div>
-        </div> */}
 
         <div className="flex flex-col md:flex-row md:justify-between items-start mt-5">
           <div className="" id="contact">
@@ -129,65 +28,8 @@ export default function Footer() {
               Si tienes dudas o preguntas, ¡no dudes en escribirnos!
             </p>
             <span className="text-xs text-gray-600 mb-4">
-              Escribenos a escuelaems@gmail.com
+              infoescuelams@gmail.com
             </span>
-            {/* <form>
-              <div className="flex flex-wrap mb-4">
-                <div className="w-full">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Nombre"
-                    className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm mb-2"
-                  />
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="Correo"
-                    className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm mb-2"
-                  />
-                  <label className="block text-sm sr-only" htmlFor="newsletter">
-                    Mensaje
-                  </label>
-                  <div className="relative flex items-center max-w-xs">
-                    <textarea
-                      value={message}
-                      onChange={handleInput}
-                      id="newsletter"
-                      className="form-input w-full text-gray-800 px-3 py-2 pr-12 text-sm"
-                      placeholder="Tu mensaje..."
-                      required
-                    />
-                    <button
-                      onClick={handleSent}
-                      type="submit"
-                      className="absolute inset-0 left-auto"
-                      aria-label="Subscribe">
-                      <span
-                        className="absolute inset-0 right-auto w-px -ml-px my-2 bg-gray-300"
-                        aria-hidden="true"></span>
-                      <svg
-                        className="w-3 h-3 fill-current text-blue-600 mx-3 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                          fillRule="nonzero"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {sent ? (
-                    <p className="mt-2 text-green-600 text-sm">
-                      Recibimos tu consulta!
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            </form> */}
           </div>
           <div className="">
             <ul className="text-sm">
@@ -198,30 +40,30 @@ export default function Footer() {
               </li>
               <li className="mb-2">
                 <a
-                  href="#0"
+                  href="https://docs.google.com/forms/d/1I6NupCumjjwil9HVju7acomNIy0GCRcZC14mvHGRbZI/prefill"
                   className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
                   Inscripcion
                 </a>
               </li>
               <li className="mb-2">
                 <a
-                  href="#0"
+                  href="#values"
                   className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
                   Nuestros Valores
                 </a>
               </li>
               <li className="mb-2">
                 <a
-                  href="#0"
+                  href="#testimonios"
                   className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
-                  Que es la EMS?
+                  Testimonios
                 </a>
               </li>
               <li className="mb-2">
                 <a
-                  href="#0"
+                  href="#home"
                   className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
-                  Video
+                  Inicio
                 </a>
               </li>
             </ul>
@@ -250,7 +92,7 @@ export default function Footer() {
               </a>
             </li>
 
-            <li className="ml-4">
+            {/* <li className="ml-4">
               <a
                 href="#0"
                 className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out"
@@ -262,7 +104,7 @@ export default function Footer() {
                   <path d="M14.023 24L14 17h-3v-3h3v-2c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V14H21l-1 3h-2.72v7h-3.257z" />
                 </svg>
               </a>
-            </li>
+            </li> */}
           </ul>
 
           {/* Copyrights note */}

@@ -54,7 +54,7 @@ export default async function Hero() {
                 </span>
                 obrenatural
               </h1> */}
-              <h1
+              <h1 id="home"
                 className="text-5xl md:text-6xl font-extrabold font-ems-normal text-blueEms-100 leading-tighter tracking-tighter mb-4"
                 data-aos="zoom-y-out">
                   Escuela de Ministerio Sobrenatural

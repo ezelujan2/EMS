@@ -23,8 +23,9 @@ export default function Testimonials() {
         <p
           className="text-xl text-gray-600 font-ems-light"
           data-aos="zoom-y-out">
-          Arcu cursus vitae congue mauris rhoncus viverra nibh cras pulvinar
-          mattis blandit libero cursus mattis.
+          Cuando Dios se manifiesta, no solo demuestra su poder y amor, si no también su carácter que nunca cambia (Ap. 19:10). 
+Que cada una de estas palabras sean una invitación a que experimentes más de Él.
+
         </p>
       </div>
       {/* Illustration behind content */}
@@ -66,7 +67,7 @@ export default function Testimonials() {
             <div className="text-center md:px-12 px-0 py-8 pt-20 mx-4 md:mx-0 max-w-3xl relative">
               <div className="absolute top-0 -mt-8 left-1/2 transform -translate-x-1/2">
                 <svg
-                  className="absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-blue-500"
+                  className="z-10 absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-blue-500"
                   viewBox="0 0 64 64"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +75,7 @@ export default function Testimonials() {
                 </svg>
                 <Image
                   className="relative rounded-full"
-                  src={TestimonialImage}
+                  src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737652921/Screenshot_2025-01-23_at_2.20.46_PM_hqvypc.png"
                   width={96}
                   height={96}
                   alt="Testimonial 01"
@@ -110,10 +111,10 @@ export default function Testimonials() {
                 </button>
               }
               <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
-                Flor Campagnolo
+                Sofi Denari
               </cite>
               <div className="text-gray-600 font-ems-light">
-                <span>Alumnado Ems 2022</span>
+                <span>Alumna 1er Año 2023</span>
               </div>
             </div>
           </div>
@@ -124,7 +125,7 @@ export default function Testimonials() {
             <div className="text-center md:px-12 px-0 py-8 pt-20 mx-4 md:mx-0 max-w-3xl relative">
               <div className="absolute top-0 -mt-8 left-1/2 transform -translate-x-1/2">
                 <svg
-                  className="absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-blue-500"
+                  className="z-10 absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-blue-500"
                   viewBox="0 0 64 64"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +133,7 @@ export default function Testimonials() {
                 </svg>
                 <Image
                   className="relative rounded-full"
-                  src={TestimonialImage}
+                  src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737653058/Screenshot_2025-01-23_at_2.24.11_PM_nhatpa.png"
                   width={96}
                   height={96}
                   alt="Testimonial 01"
@@ -142,23 +143,9 @@ export default function Testimonials() {
                 className={`md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique ${
                   expanded1 ? "expanded" : ""
                 }`}>
-                “ A mi me paso que en la EMS siento que llegue a conocer
-                muchísimo más a Jesús. Y entendí que eso implica tener una
-                relación con El. Lo cual es hermoso y esta disponible para
-                todos, y todo el tiempo. Descubrí un amor que nunca imaginé. Una
-                relación tan hermosa que transformo mi vida por completo.
-                Entendí por fin a que se refieren cuando dicen “nacer de nuevo”,
-                siento que antes vivía, pero no estaba realmente “viva”, y ahora
-                sí. Tuve la posibilidad de tener mucho más tiempo de intimidad
-                con El. Pasar tiempo juntos es lo que fue haciendo un trabajo
-                profundo en mí. Estar en su presencia es lo que más me empezó a
-                alimentar, a sanar y a llenar. Entendí que nada se compara.
-                Hacía tiempo había recibido una palabra, que decía que yo iba a
-                ser como un árbol plantado a la orilla del rio, no temerá cuando
-                venga el calor y sus hojas estarán verdes, no se angustiara en
-                año de sequía y siempre dará frutos. Y así siento que fue,
-                siento que fue un año de echar raíces profundas con El y
-                afirmarme en su amor. “
+                “ Debido a la exigencia de mi trabajo, del mal uso y otros factores, empecé a tener problemas en mis cuerdas vocales. Me encontraron hiatus y a su vez en una de las cuerdas, tenía un puntito rojo, producto de que se me había explotado un vaso sanguíneo. En un tiempo de adoración en la escuela, empiezo a sentir un calor en la zona afectada y siento que el Espíritu Santo me estaba sanando.
+				A las semanas voy al médico por control, y descubro que estaba sana! Dios no solo sana cuando lo buscamos, si no, tiene mil formas creativas de hacerlo, solo basta creer, y de lo demás Él se ocupa. ”
+
               </blockquote>
               {
                 <button
@@ -168,10 +155,10 @@ export default function Testimonials() {
                 </button>
               }
               <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
-                Flor Campagnolo
+                Damaris Meana
               </cite>
               <div className="text-gray-600 font-ems-light">
-                <span>Alumnado Ems 2022</span>
+                <span>Alumna 1er año 2023</span>
               </div>
             </div>
           </div>

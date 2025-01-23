@@ -38,7 +38,7 @@ export default function Features() {
   }, []);
 
   return (
-    <section className="relative">
+    <section id='values' className="relative">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
       <div
         className="absolute inset-0 bg-gray-100 pointer-events-none mb-16"
@@ -166,10 +166,9 @@ export default function Features() {
                 Poder
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start font-ems-light">
-                Guiando a cada estudiante hacia un camino de impacto y propósito
-                al servicio del Reino de Dios, porque el evangelio son buenas
-                nuevas, y esas buenas nuevas, no vienen separadas de su poder.
-                Fuimos creados para vivir una vida sobrenatural.
+			  Llamados a una vida de impacto y propósito al servicio del Reino de Dios, porque el evangelio, son buenas nuevas, y esas buenas nuevas, no vienen separadas de su poder.
+			  Fuimos creados para vivir una vida sobrenatural.
+
               </div>
               <a onClick={() => {
               setModalOpen2(true);
@@ -249,10 +248,7 @@ export default function Features() {
                 Comunidad
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
-                Fuimos creados para vivir en su cuerpo, la iglesia. La familia y
-                comunidad, donde somos conocidos y podemos conocer más a Jesús,
-                donde Él se encarna en la manifestación de su cuerpo y podemos
-                ver la simpleza de la gracia y el poder de la vulnerabilidad.
+			  Fuimos creados para vivir en su cuerpo, la iglesia. Esa familia y comunidad, donde somos conocidos y podemos conocer más a Jesús, donde Él se encarna en la manifestación de su cuerpo y podemos ver la simpleza de la gracia y el poder de la vulnerabilidad. 
               </div>
               <a onClick={() => {
               setModalOpen3(true);
@@ -347,11 +343,7 @@ export default function Features() {
                 Transformación
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
-                Mientras más conocemos a Dios, más conocemos quienes somos
-                nosotros como hijos. En su presencia somos transformados a la
-                imagen de Jesús, el Hijo, que nos mostró lo que de verdad era
-                vivir en una plena comunión con el Padre. El siempre nos lleva
-                al diseño original.
+			  Mientras más conocemos a Dios, más conocemos quienes somos como hijos. En su presencia somos transformados a la imagen de Jesús, el Hijo, que nos mostró lo que de verdad era vivir en una plena comunión con el Padre. El siempre nos lleva al diseño original.
               </div>
               <a onClick={() => {
               setModalOpen4(true);
