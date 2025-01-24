@@ -35,13 +35,28 @@ export default function RootLayout({
           property="og:image"
           content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg"
         />
-        <meta
-          property="og:image:secure_url"
-          content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg"
-        />
+        {/* Meta Datos Básicos */}
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta name="keywords" content={metadata.keywords} />
+        <meta name="author" content="Escuela de Ministerio Sobrenatural" />
+
+        {/* Meta Datos Open Graph */}
+        <meta property="og:title" content={metadata.title} />
+        <meta property="og:description" content={metadata.description} />
+        <meta property="og:image" content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg" />
+        <meta property="og:image:secure_url" content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg" />
         <meta property="og:image:type" content="image/jpg" />
         <meta property="og:image:width" content="500" />
         <meta property="og:image:height" content="400" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tusitio.com" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.title} />
+        <meta name="twitter:description" content={metadata.description} />
+        <meta name="twitter:image" content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg" />
       </head>
       <body
         className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}>
