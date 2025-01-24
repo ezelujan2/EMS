@@ -7,6 +7,9 @@ export default function ModalVideo() {
         "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708989208/DSC_3841_eyfcmj.jpg",
         "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708988699/_DSC4846_uujffe.jpg",
         "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1708988776/DSC_4095_ibovtl.jpg",
+		"https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737732013/_DSC7798_soi0sm.jpg",
+		"https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737732011/DSC03785_cxbilt.jpg",
+		"https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737732011/_DSC7787_faolth.jpg"
     ];
 
     const [currentImage, setCurrentImage] = useState(0);
