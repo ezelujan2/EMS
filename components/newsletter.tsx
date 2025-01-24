@@ -14,7 +14,7 @@ export default function Newsletter() {
             <div
               className="absolute right-0 bottom-0 pointer-events-none hidden lg:block"
               aria-hidden="true">
-              <svg width="428" height="328" xmlns="http://www.w3.org/2000/svg">
+              {/* <svg width="428" height="328" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient
                     cx="35.542%"
@@ -89,7 +89,7 @@ export default function Newsletter() {
                   </g>
                   <circle fill="url(#ni-a)" cx="276" cy="237" r="200" />
                 </g>
-              </svg>
+              </svg> */}
             </div>
 
             <div
