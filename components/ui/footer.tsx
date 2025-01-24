@@ -41,6 +41,7 @@ export default function Footer() {
               <li className="mb-2">
                 <a
                   href="https://docs.google.com/forms/d/1I6NupCumjjwil9HVju7acomNIy0GCRcZC14mvHGRbZI/prefill"
+				  target="_blank"
                   className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
                   Inscripcion
                 </a>

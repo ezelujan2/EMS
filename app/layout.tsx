@@ -28,8 +28,20 @@ export default function RootLayout({
       <head>
         <link
           rel="icon"
-          href="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg"
+          href="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737721668/logo_j5zufy_kenlzd_1_r9lvkz.ico"
         />
+		 <link rel="apple-touch-icon" href="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737721668/logo_j5zufy_kenlzd_1_r9lvkz.ico" />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg"
+        />
+        <meta
+          property="og:image:secure_url"
+          content="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1705459174/logo_j5zufy.jpg"
+        />
+        <meta property="og:image:type" content="image/jpg" />
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="400" />
       </head>
       <body
         className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}>

@@ -323,7 +323,7 @@ export default function Features() {
           <div className="w-full md:w-3/5">
             <img
               className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1709131521/_DSC4964_1_ttgkfk.jpg"
+              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737719606/DSC03854_ynl6ml.jpg"
               alt="comunidad"
             />
           </div>
