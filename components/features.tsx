@@ -108,6 +108,7 @@ export default function Features() {
         <Dialog initialFocus={videoRef1} onClose={() => setModalOpen1(false)}>
           {/* Modal backdrop */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0"
@@ -121,6 +122,7 @@ export default function Features() {
 
           {/* Modal dialog */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0 scale-95"
@@ -225,6 +227,7 @@ export default function Features() {
         <Dialog initialFocus={videoRef2} onClose={() => setModalOpen2(false)}>
           {/* Modal backdrop */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0"
@@ -238,6 +241,7 @@ export default function Features() {
 
           {/* Modal dialog */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0 scale-95"
@@ -312,6 +316,7 @@ export default function Features() {
         <Dialog initialFocus={videoRef3} onClose={() => setModalOpen3(false)}>
           {/* Modal backdrop */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0"
@@ -325,6 +330,7 @@ export default function Features() {
 
           {/* Modal dialog */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0 scale-95"
@@ -428,6 +434,7 @@ export default function Features() {
         <Dialog initialFocus={videoRef4} onClose={() => setModalOpen4(false)}>
           {/* Modal backdrop */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0"
@@ -441,6 +448,7 @@ export default function Features() {
 
           {/* Modal dialog */}
           <Transition.Child
+            as="div"
             className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
             enter="transition ease-out duration-200"
             enterFrom="opacity-0 scale-95"
