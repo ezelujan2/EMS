@@ -9,7 +9,9 @@ module.exports = {
     extend: {
       colors: {
         blueEms: {
-          100: "#2672ff",
+        //   100: "#F0FE57"
+		  100: "#2672ff",
+
         },
         blackEms: '#262626',
         gray: {

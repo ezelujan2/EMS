@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { motion } from "framer-motion";
 
 export default function Features() {
   // const [tab, setTab] = useState<number>(1);
@@ -59,9 +60,16 @@ export default function Features() {
             </p>
           </div>
         </div>
-        <div className="flex md:flex-row flex-col-reverse">
-          {/* Columna 1 */}
-          <div className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center">
+        {/* Row 1: Presencia (Text Left, Image Right) */}
+        <div className="flex md:flex-row flex-col-reverse overflow-hidden">
+          {/* Columna 1 (Text) - Slide from Left */}
+          <motion.div 
+            className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
               <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
                 Presencia
@@ -139,28 +147,47 @@ export default function Features() {
         </Dialog>
               </Transition>
             </div>
-          </div>
-          {/* Columna 2 */}
-          <div className="w-full md:w-3/5">
+          </motion.div>
+          {/* Columna 2 (Image) - Slide from Right */}
+          <motion.div 
+            className="w-full md:w-3/5"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <img
               className="w-full rounded"
               src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03646_lft1id.jpg"
               alt="presencia"
             />
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-10 flex md:flex-row flex-col">
-          {/* Columna 1 */}
-          <div className="w-full md:w-3/5">
+        {/* Row 2: Poder (Image Left, Text Right) */}
+        <div className="mt-10 flex md:flex-row flex-col overflow-hidden">
+          {/* Columna 1 (Image) - Slide from Left */}
+          <motion.div 
+            className="w-full md:w-3/5"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <img
               className="w-full rounded"
               src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03837_i3grjt.jpg"
               alt="poder"
             />
-          </div>
-          {/* Columna 2 */}
-          <div className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center">
+          </motion.div>
+          {/* Columna 2 (Text) - Slide from Right */}
+          <motion.div 
+            className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
               <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
                 Poder
@@ -237,12 +264,19 @@ export default function Features() {
         </Dialog>
               </Transition>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-10 flex flex-col-reverse md:flex-row items-center h-full">
-          {/* Columna 1 */}
-          <div className="w-full md:w-2/5 mx-auto mb-4 md:mb-0 md:items-center flex items-center justify-center">
+        {/* Row 3: Comunidad (Text Left, Image Right) */}
+        <div className="mt-10 flex flex-col-reverse md:flex-row items-center h-full overflow-hidden">
+          {/* Columna 1 (Text) - Slide from Left */}
+          <motion.div 
+            className="w-full md:w-2/5 mx-auto mb-4 md:mb-0 md:items-center flex items-center justify-center"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5">
               <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
                 Comunidad
@@ -318,26 +352,47 @@ export default function Features() {
               </Transition>
                
             </div>
-          </div>
-          {/* Columna 2 */}
-          <div className="w-full md:w-3/5">
+          </motion.div>
+          {/* Columna 2 (Image) - Slide from Right */}
+          <motion.div 
+            className="w-full md:w-3/5"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <img
               className="w-full rounded"
               src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737719606/DSC03854_ynl6ml.jpg"
               alt="comunidad"
             />
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-10 flex md:flex-row flex-col">
-          <div className="w-full md:w-3/5">
+        {/* Row 4: Transformación (Image Left, Text Right) */}
+        <div className="mt-10 flex md:flex-row flex-col overflow-hidden">
+          {/* Columna 1 (Image) - Slide from Left */}
+          <motion.div 
+            className="w-full md:w-3/5"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <img
               className="w-full  rounded"
               src="https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1705459547/poder_nro5cd.jpg"
               alt="Transformacion"
             />
-          </div>
-          <div className="w-11/12 m-2 md:m-0 md:w-2/5 flex justify-center items-center mx-4">
+          </motion.div>
+          {/* Columna 2 (Text) - Slide from Right */}
+          <motion.div 
+            className="w-11/12 m-2 md:m-0 md:w-2/5 flex justify-center items-center mx-4"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 m-10">
               <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
                 Transformación
@@ -412,7 +467,7 @@ export default function Features() {
         </Dialog>
               </Transition>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div id="testimonios" />

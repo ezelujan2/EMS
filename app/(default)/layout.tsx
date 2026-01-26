@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Footer from "@/components/ui/footer";
+import SmoothScrolling from "@/components/smooth-scrolling";
 
 export default function DefaultLayout({
   children,
@@ -22,10 +23,9 @@ export default function DefaultLayout({
   });
 
   return (
-    <>
+    <SmoothScrolling>
       <main className="grow">{children}</main>
-
       <Footer />
-    </>
+    </SmoothScrolling>
   );
 }

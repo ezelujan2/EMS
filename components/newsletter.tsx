@@ -1,133 +1,115 @@
+"use client";
+
 import Link from "next/link";
 import Logo from "./ui/logo";
+import { motion, Variants } from "framer-motion";
 
 export default function Newsletter() {
+  
+  const particleVariants: Variants = {
+    animate: {
+      y: [0, -40, 0],
+      x: [0, 20, 0],
+      opacity: [0.3, 0.6, 0.3],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    }
+  };
+
   return (
     <section>
-      <div className="max-w-full mb-0">
+      <div className="max-w-full mb-0 md:p-10 p-4">
         <div className="pb-0">
-          {/* CTA box */}
-          <div
-            className="relative bg-gray-900 rounded pt-10 px-8 md:py-16 md:px-40 shadow-2xl overflow-hidden mb-0"
-            data-aos="zoom-y-out">
-            {/* Background illustration */}
-            <div
-              className="absolute right-0 bottom-0 pointer-events-none hidden lg:block"
-              aria-hidden="true">
-              {/* <svg width="428" height="328" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient
-                    cx="35.542%"
-                    cy="34.553%"
-                    fx="35.542%"
-                    fy="34.553%"
-                    r="96.031%"
-                    id="ni-a">
-                    <stop stopColor="#DFDFDF" offset="0%" />
-                    <stop stopColor="#4C4C4C" offset="44.317%" />
-                    <stop stopColor="#333" offset="100%" />
-                  </radialGradient>
-                </defs>
-                <g fill="none" fillRule="evenodd">
-                  <g fill="#FFF">
-                    <ellipse
-                      fillOpacity=".04"
-                      cx="185"
-                      cy="15.576"
-                      rx="16"
-                      ry="15.576"
-                    />
-                    <ellipse
-                      fillOpacity=".24"
-                      cx="100"
-                      cy="68.402"
-                      rx="24"
-                      ry="23.364"
-                    />
-                    <ellipse
-                      fillOpacity=".12"
-                      cx="29"
-                      cy="251.231"
-                      rx="29"
-                      ry="28.231"
-                    />
-                    <ellipse
-                      fillOpacity=".64"
-                      cx="29"
-                      cy="251.231"
-                      rx="8"
-                      ry="7.788"
-                    />
-                    <ellipse
-                      fillOpacity=".12"
-                      cx="342"
-                      cy="31.303"
-                      rx="8"
-                      ry="7.788"
-                    />
-                    <ellipse
-                      fillOpacity=".48"
-                      cx="62"
-                      cy="126.811"
-                      rx="2"
-                      ry="1.947"
-                    />
-                    <ellipse
-                      fillOpacity=".12"
-                      cx="78"
-                      cy="7.072"
-                      rx="2"
-                      ry="1.947"
-                    />
-                    <ellipse
-                      fillOpacity=".64"
-                      cx="185"
-                      cy="15.576"
-                      rx="6"
-                      ry="5.841"
-                    />
-                  </g>
-                  <circle fill="url(#ni-a)" cx="276" cy="237" r="200" />
-                </g>
-              </svg> */}
-            </div>
+          
+          {/* Main Container with Gradient Border Wrapper */}
+          <motion.div
+            className="relative p-[1px] rounded-2xl overflow-hidden shadow-2xl"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Animated Gradient Border Layer */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_auto] animate-text-gradient opacity-75"></div>
 
-            <div
-              id="inscript"
-              className="relative flex flex-col lg:flex-row justify-between items-center">
-              {/* CTA content */}
-              <div className="text-center lg:text-left lg:max-w-xl">
-                <h3 className="h3 text-white mb-2 font-ems-normal">
-                  Queres ser parte de la EMS?
-                </h3>
-                <p className="text-gray-300 text-lg mb-6 font-ems-light">
-                  Inscribite y convertirte en el avivador que fuiste creado para
-                  ser!
-                </p>
+            {/* Content Container (Inner) */}
+            <div className="relative bg-gray-900 rounded-2xl px-8 py-10 md:py-16 md:px-16 overflow-hidden">
+                
+                {/* Background Decor: Rich Gradient & Particles */}
+                <div className="absolute inset-0 w-full h-full pointer-events-none">
+                     {/* Deep Background Gradient */}
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-blue-950/40"></div>
+                     
+                     {/* Subtle Dot Pattern */}
+                     <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-5"></div>
 
-                {/* CTA form */}
-                <form className="w-full lg:w-auto">
-                  <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
-                    <a
-                      className="btn text-white bg-blue-600 hover:bg-blue-700 mb-6 shadow font-ems-normal"
-                      href="https://docs.google.com/forms/d/1I6NupCumjjwil9HVju7acomNIy0GCRcZC14mvHGRbZI/prefill"
-					  target="_blank">
-                      Inscribirse
-                    </a>
+                     {/* Floating Particles */}
+                     <motion.div 
+                        className="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl"
+                        variants={particleVariants}
+                        animate="animate"
+                     />
+                     <motion.div 
+                        className="absolute bottom-10 right-10 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"
+                        variants={particleVariants}
+                        animate="animate"
+                        transition={{ delay: 2, duration: 10 }}
+                     />
+                </div>
+
+                <div
+                  id="inscript"
+                  className="relative flex flex-col lg:flex-row justify-between items-center z-10 gap-8">
+                  
+                  {/* Text Content */}
+                  <div className="text-center lg:text-left lg:max-w-xl">
+                    <motion.h3 
+                        className="text-3xl md:text-5xl font-extrabold font-ems-normal mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-200"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                      Queres ser parte de la EMS?
+                    </motion.h3>
+                    <motion.p 
+                        className="text-blue-100/80 text-lg md:text-xl mb-8 font-ems-light"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                    >
+                      Inscribite y convertite en el avivador que fuiste creado para ser.
+                    </motion.p>
+
+                    {/* Button */}
+                    <div className="flex justify-center lg:justify-start">
+                        <motion.a
+                          className="btn text-white bg-blue-600 hover:bg-blue-500 w-full sm:w-auto px-10 py-4 text-lg shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:shadow-[0_0_30px_rgba(37,99,235,0.7)] transition-all duration-300 rounded-full font-ems-bold border border-blue-400/30 backdrop-blur-sm"
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSdPqwiE3WVKdDoyjEgFoNfV43rMLgWzDdLrwSbOCny9dp7oaA/viewform"
+                          target="_blank"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Inscribirse Ahora
+                        </motion.a>
+                    </div>
                   </div>
-                  {/* Success message */}
-                  {/* <p className="text-sm text-gray-400 mt-3">Thanks for subscribing!</p> */}
-                </form>
-              </div>
-              <Link href="/">
-                <img
-                  src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1706961957/logo_j5zufy-Photoroom.png-Photoroom_op8fmv.png"
-                  alt="logo"
-                  className=" md:w-64  hidden md:flex mr-14"
-                />
-              </Link>
+
+                  {/* Logo / Image */}
+                  <Link href="/">
+                    <motion.img
+                      src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1706961957/logo_j5zufy-Photoroom.png-Photoroom_op8fmv.png"
+                      alt="logo"
+                      className="w-48 md:w-64 opacity-90 drop-shadow-2xl"
+                      whileHover={{ scale: 1.1, rotate: 5, filter: "brightness(1.2)" }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    />
+                  </Link>
+                </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

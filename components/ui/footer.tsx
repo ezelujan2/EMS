@@ -40,7 +40,7 @@ export default function Footer() {
               </li>
               <li className="mb-2">
                 <a
-                  href="https://docs.google.com/forms/d/1I6NupCumjjwil9HVju7acomNIy0GCRcZC14mvHGRbZI/prefill"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdPqwiE3WVKdDoyjEgFoNfV43rMLgWzDdLrwSbOCny9dp7oaA/viewform"
 				  target="_blank"
                   className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
                   Inscripcion
