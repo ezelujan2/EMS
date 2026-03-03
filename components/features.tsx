@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { motion } from "framer-motion";
+import { GarabatoCloud, GarabatoSparkle } from "./ui/garabatos";
 
 export default function Features() {
   // const [tab, setTab] = useState<number>(1);
@@ -53,7 +54,7 @@ export default function Features() {
             <h1 className="text-4xl md:text-7xl mb-4 font-ems-normal">
               Qué es la EMS?
             </h1>
-            <p className="text-md md:text-xl text-gray-600 font-ems-light">
+            <p className="text-md md:text-xl text-gray-600">
               La identidad de la EMS. Cada valor es un pilar de compromiso.
               Estos principios son más que palabras; son el núcleo de nuestra
               misión como escuela.
@@ -74,7 +75,7 @@ export default function Features() {
               <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
                 Presencia
               </h1>
-              <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start font-ems-light">
+              <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start">
                 Honramos la presencia de Dios y buscamos cultivar ambientes
                 donde Él sea el centro. En ese lugar lo conocemos y descubrimos
                 más de su bondad, de su belleza, de quién es Él. Mientras más lo
@@ -159,10 +160,12 @@ export default function Features() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <img
-              className="w-full rounded"
+              className="w-full rounded relative z-10"
               src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03646_lft1id.jpg"
               alt="presencia"
             />
+            {/* Added Sparse Grabato Decor */}
+            <GarabatoSparkle className="absolute -bottom-2 md:-bottom-6 -right-2 md:-right-6 text-ems-yellow opacity-50 hidden md:block scale-75 md:scale-100" />
           </motion.div>
         </div>
 
@@ -194,7 +197,7 @@ export default function Features() {
               <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
                 Poder
               </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start font-ems-light">
+              <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start">
 			  Llamados a una vida de impacto y propósito al servicio del Reino de Dios, porque el evangelio, son buenas nuevas, y esas buenas nuevas, no vienen separadas de su poder.
 			  Fuimos creados para vivir una vida sobrenatural.
 
@@ -281,11 +284,12 @@ export default function Features() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5">
+            <div className="relative rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5 z-10">
+              <GarabatoCloud className="absolute -top-6 md:-top-10 -left-6 md:-left-10 text-ems-lightBlue opacity-40 hidden md:block scale-50 md:scale-100" />
               <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
                 Comunidad
               </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
+              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
 			  Fuimos creados para vivir en su cuerpo, la iglesia. Esa familia y comunidad, donde somos conocidos y podemos conocer más a Jesús, donde Él se encarna en la manifestación de su cuerpo y podemos ver la simpleza de la gracia y el poder de la vulnerabilidad. 
               </div>
               <a onClick={() => {
@@ -403,7 +407,7 @@ export default function Features() {
               <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
                 Transformación
               </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start font-ems-light">
+              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
 			  Mientras más conocemos a Dios, más conocemos quienes somos como hijos. En su presencia somos transformados a la imagen de Jesús, el Hijo, que nos mostró lo que de verdad era vivir en una plena comunión con el Padre. El siempre nos lleva al diseño original.
               </div>
               <a onClick={() => {

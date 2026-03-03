@@ -39,7 +39,7 @@ export default function ModalVideo() {
                             <h1 className="hidden md:flex text-2xl md:text-8xl mb-12 font-ems-normal" style={{ opacity: 1 }}>
                                 El Reino de Dios se ha acercado
                             </h1>
-                            <p className="hidden md:flex text-xl text-transparent text-white font-ems-light" style={{ opacity: 1 }}>
+                            <p className="hidden md:flex text-xl text-transparent text-white" style={{ opacity: 1 }}>
                                 Experimenta la manifestación de la vida de Cristo y encuentra la plenitud como hijo, en una relación correcta con el Padre.
                             </p>
                         </div>

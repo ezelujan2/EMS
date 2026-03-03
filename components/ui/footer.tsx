@@ -19,7 +19,7 @@ export default function Footer() {
   }
   return (
     <footer>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex-col md:flex-row font-ems-normal">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex-col md:flex-row">
 
         <div className="flex flex-col md:flex-row md:justify-between items-start mt-5">
           <div className="" id="contact">

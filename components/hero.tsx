@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { GarabatoSmiley, GarabatoHighlight, GarabatoSparkle } from "./ui/garabatos";
 
 export default function Hero() {
 
@@ -34,8 +35,15 @@ export default function Hero() {
           {/* Subtle Dot Pattern */}
           <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50"></div>
           
-          {/* Brand Blue Glow - Top Center */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blueEms-100/10 blur-[120px] rounded-full mix-blend-multiply"></div>
+          {/* Brand Glow - Top Center */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-ems-primary/10 blur-[120px] rounded-full mix-blend-multiply"></div>
+
+          {/* Garabatos (Sparingly applied) */}
+          <div className="hidden md:block pointer-events-none z-0">
+            <GarabatoSparkle className="absolute top-40 left-[18%] md:left-[18%] text-ems-yellow opacity-60 scale-75 md:scale-100" />
+            <GarabatoHighlight className="absolute top-[18%] md:top-[25%] right-[5%] md:right-[20%] text-ems-lightBlue opacity-40 -rotate-6 scale-50 md:scale-100" />
+            <GarabatoSmiley className="absolute bottom-16 md:bottom-16 left-[5%] md:left-[25%] text-ems-gold opacity-50 -rotate-12 scale-50 md:scale-75" />
+          </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -49,7 +57,7 @@ export default function Hero() {
           >
             <motion.h1 
               id="home"
-              className="text-5xl md:text-7xl font-extrabold font-ems-normal text-blueEms-100 mb-6 leading-tight tracking-tight drop-shadow-sm"
+              className="text-5xl md:text-7xl font-extrabold font-ems-normal text-ems-primary mb-6 leading-tight tracking-tight drop-shadow-sm"
               variants={itemVariants}
             >
                 Escuela de Ministerio Sobrenatural
@@ -57,7 +65,7 @@ export default function Hero() {
 
             <div className="max-w-3xl mx-auto">
               <motion.p
-                className="text-xl md:text-2xl text-gray-600 mb-10 font-ems-light leading-relaxed"
+                className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed"
                 variants={itemVariants}
               >
                 Nuestra misión es formar a los creyentes en su identidad como
@@ -71,14 +79,14 @@ export default function Hero() {
               >
                 <motion.div variants={itemVariants} className="w-full sm:w-auto">
                   <a
-                    className="btn text-white bg-blue-600 hover:bg-blue-700 w-full px-8 py-4 shadow-lg shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-300 transform hover:-translate-y-0.5 font-ems-bold rounded-lg text-lg"
+                    className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full px-8 py-4 shadow-lg shadow-ems-gold/40 hover:shadow-ems-gold/60 transition-all duration-300 transform hover:-translate-y-0.5 font-ems-light rounded-lg text-lg"
                     href="#testimonios">
                     Testimonios
                   </a>
                 </motion.div>
                 <motion.div variants={itemVariants} className="w-full sm:w-auto mt-4 sm:mt-0">
                   <a
-                    className="btn text-white bg-gray-900 hover:bg-gray-800 w-full px-8 py-4 shadow hover:shadow-lg transition-all duration-300 font-ems-bold rounded-lg text-lg"
+                    className="btn text-white bg-gray-900 hover:bg-gray-800 w-full px-8 py-4 shadow hover:shadow-lg transition-all duration-300 font-ems-light rounded-lg text-lg"
                     href="#inscript">
                     Inscripciones
                   </a>

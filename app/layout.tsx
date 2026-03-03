@@ -61,7 +61,14 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}>
-        <section>
+        {/* Global Destellos (Brand Glows) - Subtle version */}
+        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-30 mix-blend-multiply">
+          <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vh] bg-ems-primary blur-[150px] rounded-full animate-pulse" style={{ animationDuration: '10s' }}></div>
+          <div className="absolute bottom-[-10%] right-[-10%] w-[70vw] h-[70vh] bg-ems-yellow blur-[180px] rounded-full animate-pulse" style={{ animationDuration: '12s', animationDelay: '2s' }}></div>
+          <div className="absolute top-[30%] left-[20%] w-[50vw] h-[50vh] bg-ems-lightBlue blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '4s', animationDuration: '11s' }}></div>
+          <div className="absolute top-[60%] right-[30%] w-[45vw] h-[45vh] bg-ems-red blur-[160px] rounded-full animate-pulse" style={{ animationDelay: '6s', animationDuration: '14s' }}></div>
+        </div>
+        <section className="relative z-10">
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
             <Header />
             {children}

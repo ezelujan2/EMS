@@ -23,8 +23,8 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed bg-blueEms-100 w-full z-30 md:bg-opacity-100 transition duration-300 ease-in-out ${
-        !top ? "bg-blueEms-100 backdrop-blur-sm shadow-lg" : ""
+      className={`fixed bg-ems-primary w-full z-30 md:bg-opacity-100 transition duration-300 ease-in-out ${
+        !top ? "bg-ems-primary backdrop-blur-sm shadow-lg" : ""
       }`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <div className="flex items-center justify-between p-2 h-24 md:h-28">

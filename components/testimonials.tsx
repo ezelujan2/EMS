@@ -21,7 +21,7 @@ export default function Testimonials() {
       <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 md:mt-32 mt-2">
         <h2 className="h2 mb-4 font-ems-normal">Testimonios</h2>
         <p
-          className="text-xl text-gray-600 font-ems-light"
+          className="text-xl text-gray-600"
           data-aos="zoom-y-out">
           Cuando Dios se manifiesta, no solo demuestra su poder y amor, si no también su carácter que nunca cambia (Ap. 19:10). 
 Que cada una de estas palabras sean una invitación a que experimentes más de Él.
@@ -67,7 +67,7 @@ Que cada una de estas palabras sean una invitación a que experimentes más de �
             <div className="text-center md:px-12 px-0 py-8 pt-20 mx-4 md:mx-0 max-w-3xl relative">
               <div className="absolute top-0 -mt-8 left-1/2 transform -translate-x-1/2">
                 <svg
-                  className="z-10 absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-blue-500"
+                  className="z-10 absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-ems-primary"
                   viewBox="0 0 64 64"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +82,7 @@ Que cada una de estas palabras sean una invitación a que experimentes más de �
                 />
               </div>
               <blockquote
-                className={`md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique ${
+                className={`md:text-xl text-md md:text-md italic mb-4 ${
                   expanded ? "expanded" : ""
                 }`}>
                 “ A mi me paso que en la EMS siento que llegue a conocer
@@ -105,15 +105,15 @@ Que cada una de estas palabras sean una invitación a que experimentes más de �
               </blockquote>
               {
                 <button
-                  className="text-blue-500 font-bold hover:underline focus:outline-none"
+                  className="text-ems-primary font-bold hover:underline focus:outline-none"
                   onClick={handleToggle}>
                   {expanded ? "Ver menos" : "Ver más"}
                 </button>
               }
-              <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
+              <cite className="block font-bold md:text-lg text-md not-italic mb-1">
                 Sofi Denari
               </cite>
-              <div className="text-gray-600 font-ems-light">
+              <div className="text-gray-600">
                 <span>Alumna 1er Año 2023</span>
               </div>
             </div>
@@ -125,7 +125,7 @@ Que cada una de estas palabras sean una invitación a que experimentes más de �
             <div className="text-center md:px-12 px-0 py-8 pt-20 mx-4 md:mx-0 max-w-3xl relative">
               <div className="absolute top-0 -mt-8 left-1/2 transform -translate-x-1/2">
                 <svg
-                  className="z-10 absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-blue-500"
+                  className="z-10 absolute top-0 right-0 -mt-3 -mr-8 w-16 h-16 fill-current text-ems-primary"
                   viewBox="0 0 64 64"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +140,7 @@ Que cada una de estas palabras sean una invitación a que experimentes más de �
                 />
               </div>
               <blockquote
-                className={`md:text-xl text-md md:text-md font-medium mb-4 font-ems-light-oblique ${
+                className={`md:text-xl text-md md:text-md italic mb-4 ${
                   expanded1 ? "expanded" : ""
                 }`}>
                 “ Debido a la exigencia de mi trabajo, del mal uso y otros factores, empecé a tener problemas en mis cuerdas vocales. Me encontraron hiatus y a su vez en una de las cuerdas, tenía un puntito rojo, producto de que se me había explotado un vaso sanguíneo. En un tiempo de adoración en la escuela, empiezo a sentir un calor en la zona afectada y siento que el Espíritu Santo me estaba sanando.
@@ -149,15 +149,15 @@ Que cada una de estas palabras sean una invitación a que experimentes más de �
               </blockquote>
               {
                 <button
-                  className="text-blue-500 font-bold hover:underline focus:outline-none"
+                  className="text-ems-primary font-bold hover:underline focus:outline-none"
                   onClick={handleToggle1}>
                   {expanded1 ? "Ver menos" : "Ver más"}
                 </button>
               }
-              <cite className="block font-bold md:text-lg text-md not-italic mb-1 font-ems-bold">
+              <cite className="block font-bold md:text-lg text-md not-italic mb-1">
                 Damaris Meana
               </cite>
-              <div className="text-gray-600 font-ems-light">
+              <div className="text-gray-600">
                 <span>Alumna 1er año 2023</span>
               </div>
             </div>

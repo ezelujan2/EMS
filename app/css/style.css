@@ -17,32 +17,24 @@
 
 
 @font-face {
-  font-family: "articulatcf-light";
-  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Light.otf")
-    format("opentype");
+  font-family: "ems-lazydog";
+  src: url("../../public/ems-fonts/lazy_dog.ttf")
+    format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "articulatcf-lightOblique";
-  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-LightOblique.otf")
-    format("opentype");
+  font-family: "ems-bryndan";
+  src: url("../../public/ems-fonts/Bryndan-Write-Book/Bryndan_Write.ttf")
+    format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "articulatcf-bold";
-  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Bold.otf")
-    format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "articulatcf-normal";
-  src: url("../../public/font/articulat-cf-font-family-1706933577-0/ArticulatCF-Normal.otf")
+  font-family: "ems-bristol";
+  src: url("../../public/ems-fonts/bristol/Bristol.otf")
     format("opentype");
   font-weight: normal;
   font-style: normal;

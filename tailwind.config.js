@@ -8,10 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        blueEms: {
-        //   100: "#F0FE57"
-		  100: "#2672ff",
-
+        ems: {
+          primary: "#94976F",
+          gold: "#F2AB28",
+          red: "#F5683F",
+          lightBlue: "#81A9BE",
+          beige: "#DAD4BB",
+          yellow: "#E4DD50",
         },
         blackEms: '#262626',
         gray: {
@@ -68,10 +71,10 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
-        'ems-light': ['articulatcf-light', 'sans-serif'],
-        'ems-light-oblique': ['articulatcf-lightOblique', 'sans-serif'],
-        'ems-bold': ['articulatcf-bold', 'sans-serif'],
-        'ems-normal': ['articulatcf-normal', 'sans-serif']
+        'ems-light': ['ems-lazydog', 'sans-serif'],
+        'ems-light-oblique': ['ems-lazydog', 'sans-serif'],
+        'ems-bold': ['ems-bristol', 'sans-serif'],
+        'ems-normal': ['ems-bryndan', 'sans-serif']
       },
       fontSize: {
         xs: "0.75rem",

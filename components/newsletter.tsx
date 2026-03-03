@@ -33,7 +33,7 @@ export default function Newsletter() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             {/* Animated Gradient Border Layer */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_auto] animate-text-gradient opacity-75"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-ems-gold via-ems-red to-ems-gold bg-[length:200%_auto] animate-text-gradient opacity-75"></div>
 
             {/* Content Container (Inner) */}
             <div className="relative bg-gray-900 rounded-2xl px-8 py-10 md:py-16 md:px-16 overflow-hidden">
@@ -41,19 +41,19 @@ export default function Newsletter() {
                 {/* Background Decor: Rich Gradient & Particles */}
                 <div className="absolute inset-0 w-full h-full pointer-events-none">
                      {/* Deep Background Gradient */}
-                     <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-blue-950/40"></div>
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-ems-primary/40"></div>
                      
                      {/* Subtle Dot Pattern */}
                      <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-5"></div>
 
                      {/* Floating Particles */}
                      <motion.div 
-                        className="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl"
+                        className="absolute top-10 left-10 w-32 h-32 bg-ems-gold/20 rounded-full blur-3xl"
                         variants={particleVariants}
                         animate="animate"
                      />
                      <motion.div 
-                        className="absolute bottom-10 right-10 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"
+                        className="absolute bottom-10 right-10 w-48 h-48 bg-ems-red/10 rounded-full blur-3xl"
                         variants={particleVariants}
                         animate="animate"
                         transition={{ delay: 2, duration: 10 }}
@@ -67,7 +67,7 @@ export default function Newsletter() {
                   {/* Text Content */}
                   <div className="text-center lg:text-left lg:max-w-xl">
                     <motion.h3 
-                        className="text-3xl md:text-5xl font-extrabold font-ems-normal mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-200"
+                        className="text-3xl md:text-5xl font-extrabold font-ems-normal mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-ems-beige to-ems-yellow"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
@@ -75,7 +75,7 @@ export default function Newsletter() {
                       Queres ser parte de la EMS?
                     </motion.h3>
                     <motion.p 
-                        className="text-blue-100/80 text-lg md:text-xl mb-8 font-ems-light"
+                        className="text-ems-beige/80 text-lg md:text-xl mb-8"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.3 }}
@@ -86,7 +86,7 @@ export default function Newsletter() {
                     {/* Button */}
                     <div className="flex justify-center lg:justify-start">
                         <motion.a
-                          className="btn text-white bg-blue-600 hover:bg-blue-500 w-full sm:w-auto px-10 py-4 text-lg shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:shadow-[0_0_30px_rgba(37,99,235,0.7)] transition-all duration-300 rounded-full font-ems-bold border border-blue-400/30 backdrop-blur-sm"
+                          className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full sm:w-auto px-10 py-4 text-lg shadow-[0_0_20px_rgba(242,171,40,0.5)] hover:shadow-[0_0_30px_rgba(242,171,40,0.7)] transition-all duration-300 rounded-full font-ems-light border border-ems-gold/30 backdrop-blur-sm"
                           href="https://docs.google.com/forms/d/e/1FAIpQLSdPqwiE3WVKdDoyjEgFoNfV43rMLgWzDdLrwSbOCny9dp7oaA/viewform"
                           target="_blank"
                           whileHover={{ scale: 1.05 }}
