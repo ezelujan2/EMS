@@ -51,7 +51,7 @@ export default function Features() {
         <div className="pt-12 md:pt-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="text-4xl md:text-7xl mb-4 font-ems-normal">
+            <h1 className="text-4xl md:text-7xl mb-4">
               Qué es la EMS?
             </h1>
             <p className="text-md md:text-xl text-gray-600">
@@ -72,7 +72,7 @@ export default function Features() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
-              <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
+              <h1 className="text-4xl md:text-5xl text-center mb-4">
                 Presencia
               </h1>
               <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start">
@@ -194,7 +194,7 @@ export default function Features() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
-              <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
+              <h1 className="text-4xl md:text-5xl text-center">
                 Poder
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start">
@@ -286,7 +286,7 @@ export default function Features() {
           >
             <div className="relative rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5 z-10">
               <GarabatoCloud className="absolute -top-6 md:-top-10 -left-6 md:-left-10 text-ems-lightBlue opacity-40 hidden md:block scale-50 md:scale-100" />
-              <h1 className="text-4xl md:text-5xl text-center mb-4 font-ems-normal">
+              <h1 className="text-4xl md:text-5xl text-center mb-4">
                 Comunidad
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
@@ -404,7 +404,7 @@ export default function Features() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 m-10">
-              <h1 className="text-4xl md:text-5xl text-center font-ems-normal">
+              <h1 className="text-4xl md:text-5xl text-center">
                 Transformación
               </h1>
               <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">

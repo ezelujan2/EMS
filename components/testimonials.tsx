@@ -19,7 +19,7 @@ export default function Testimonials() {
   return (
     <section className="relative">
       <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 md:mt-32 mt-2">
-        <h2 className="h2 mb-4 font-ems-normal">Testimonios</h2>
+        <h2 className="h2 mb-4">Testimonios</h2>
         <p
           className="text-xl text-gray-600"
           data-aos="zoom-y-out">

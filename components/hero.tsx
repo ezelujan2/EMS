@@ -38,11 +38,8 @@ export default function Hero() {
           {/* Brand Glow - Top Center */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-ems-primary/10 blur-[120px] rounded-full mix-blend-multiply"></div>
 
-          {/* Garabatos (Sparingly applied) */}
+          {/* Garabatos (Removed to declutter background) */}
           <div className="hidden md:block pointer-events-none z-0">
-            <GarabatoSparkle className="absolute top-40 left-[18%] md:left-[18%] text-ems-yellow opacity-60 scale-75 md:scale-100" />
-            <GarabatoHighlight className="absolute top-[18%] md:top-[25%] right-[5%] md:right-[20%] text-ems-lightBlue opacity-40 -rotate-6 scale-50 md:scale-100" />
-            <GarabatoSmiley className="absolute bottom-16 md:bottom-16 left-[5%] md:left-[25%] text-ems-gold opacity-50 -rotate-12 scale-50 md:scale-75" />
           </div>
       </div>
 
@@ -57,7 +54,7 @@ export default function Hero() {
           >
             <motion.h1 
               id="home"
-              className="text-5xl md:text-7xl font-extrabold font-ems-normal text-ems-primary mb-6 leading-tight tracking-tight drop-shadow-sm"
+              className="text-5xl md:text-7xl font-extrabold text-ems-primary mb-6 leading-tight tracking-tight drop-shadow-sm"
               variants={itemVariants}
             >
                 Escuela de Ministerio Sobrenatural
@@ -75,20 +72,31 @@ export default function Hero() {
               </motion.p>
               
               <div
-                className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center gap-4"
+                className="max-w-xs mx-auto sm:max-w-none grid grid-cols-1 sm:grid-cols-3 gap-4"
               >
-                <motion.div variants={itemVariants} className="w-full sm:w-auto">
+                <motion.div variants={itemVariants} className="w-full">
                   <a
-                    className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full px-8 py-4 shadow-lg shadow-ems-gold/40 hover:shadow-ems-gold/60 transition-all duration-300 transform hover:-translate-y-0.5 font-ems-light rounded-lg text-lg"
+                    className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full px-4 py-4 shadow-lg shadow-ems-gold/40 hover:shadow-ems-gold/60 transition-all duration-300 transform hover:-translate-y-0.5 rounded-lg text-lg text-center"
                     href="#testimonios">
                     Testimonios
                   </a>
                 </motion.div>
-                <motion.div variants={itemVariants} className="w-full sm:w-auto mt-4 sm:mt-0">
+                <motion.div variants={itemVariants} className="w-full">
                   <a
-                    className="btn text-white bg-gray-900 hover:bg-gray-800 w-full px-8 py-4 shadow hover:shadow-lg transition-all duration-300 font-ems-light rounded-lg text-lg"
+                    className="btn text-white bg-gray-900 hover:bg-gray-800 w-full px-4 py-4 shadow-lg shadow-gray-900/40 hover:shadow-gray-900/60 transition-all duration-300 transform hover:-translate-y-0.5 rounded-lg text-lg text-center"
                     href="#inscript">
                     Inscripciones
+                  </a>
+                </motion.div>
+                <motion.div variants={itemVariants} className="w-full">
+                  <a
+                    className="btn text-white bg-ems-primary hover:bg-ems-primary/90 w-full px-4 py-4 shadow-lg shadow-ems-primary/40 hover:shadow-ems-primary/60 transition-all duration-300 transform hover:-translate-y-0.5 rounded-lg text-lg flex items-center justify-center gap-2"
+                    href="/documents/EMS Temario 2026.pdf"
+                    download="EMS_Temario_2026.pdf">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    <span>Temario EMS</span>
                   </a>
                 </motion.div>
               </div>

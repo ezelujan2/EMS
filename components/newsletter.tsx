@@ -67,7 +67,7 @@ export default function Newsletter() {
                   {/* Text Content */}
                   <div className="text-center lg:text-left lg:max-w-xl">
                     <motion.h3 
-                        className="text-3xl md:text-5xl font-extrabold font-ems-normal mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-ems-beige to-ems-yellow"
+                        className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-ems-beige to-ems-yellow"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
@@ -86,7 +86,7 @@ export default function Newsletter() {
                     {/* Button */}
                     <div className="flex justify-center lg:justify-start">
                         <motion.a
-                          className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full sm:w-auto px-10 py-4 text-lg shadow-[0_0_20px_rgba(242,171,40,0.5)] hover:shadow-[0_0_30px_rgba(242,171,40,0.7)] transition-all duration-300 rounded-full font-ems-light border border-ems-gold/30 backdrop-blur-sm"
+                          className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full sm:w-auto px-10 py-4 text-lg shadow-[0_0_20px_rgba(242,171,40,0.5)] hover:shadow-[0_0_30px_rgba(242,171,40,0.7)] transition-all duration-300 rounded-full border border-ems-gold/30 backdrop-blur-sm"
                           href="https://docs.google.com/forms/d/e/1FAIpQLSdPqwiE3WVKdDoyjEgFoNfV43rMLgWzDdLrwSbOCny9dp7oaA/viewform"
                           target="_blank"
                           whileHover={{ scale: 1.05 }}

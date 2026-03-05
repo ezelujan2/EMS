@@ -1,13 +1,13 @@
 import "./css/style.css";
 
-import { Inter } from "next/font/google";
+import localFont from 'next/font/local';
 
 import Header from "@/components/ui/header";
 import Banner from "@/components/banner";
 import { Analytics } from "@vercel/analytics/react"
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "../public/ems-fonts/Inter/Inter-VariableFont_opsz,wght.ttf",
   variable: "--font-inter",
   display: "swap",
 });
