@@ -38,8 +38,11 @@ export default function Hero() {
           {/* Brand Glow - Top Center */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-ems-primary/10 blur-[120px] rounded-full mix-blend-multiply"></div>
 
-          {/* Garabatos (Removed to declutter background) */}
+          {/* Garabatos (Sparingly applied) */}
           <div className="hidden md:block pointer-events-none z-0">
+            <GarabatoSparkle className="absolute top-40 left-[18%] md:left-[18%] text-ems-yellow opacity-60 scale-75 md:scale-100" />
+            <GarabatoHighlight className="absolute top-[18%] md:top-[25%] right-[0%] md:right-[10%] text-ems-lightBlue opacity-40 -rotate-6 scale-50 md:scale-100" />
+            <GarabatoSmiley className="absolute bottom-16 md:bottom-16 left-[5%] md:left-[25%] text-ems-gold opacity-50 -rotate-12 scale-50 md:scale-75" />
           </div>
       </div>
 
