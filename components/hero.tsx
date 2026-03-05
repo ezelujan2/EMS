@@ -5,6 +5,7 @@ import { GarabatoSmiley, GarabatoHighlight, GarabatoSparkle } from "./ui/garabat
 
 export default function Hero() {
 
+	
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
