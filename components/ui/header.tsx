@@ -1,70 +1,79 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import Logo from "./logo";
-import Dropdown from "@/components/utils/dropdown";
-import MobileMenu from "./mobile-menu";
 
 export default function Header() {
-  const [top, setTop] = useState<boolean>(true);
-
-  // detect whether user has scrolled the page down by 10px
-  const scrollHandler = () => {
-    window.pageYOffset > 10 ? setTop(false) : setTop(true);
-  };
+  const [top, setTop] = useState(true);
 
   useEffect(() => {
-    scrollHandler();
-    window.addEventListener("scroll", scrollHandler);
-    return () => window.removeEventListener("scroll", scrollHandler);
-  }, [top]);
+    const onScroll = () => setTop(window.scrollY <= 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
-      className={`fixed bg-ems-primary w-full z-30 md:bg-opacity-100 transition duration-300 ease-in-out ${
-        !top ? "bg-ems-primary backdrop-blur-sm shadow-lg" : ""
-      }`}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="flex items-center justify-between p-2 h-24 md:h-28">
-          {/* Site branding */}
-          <div className="shrink-0 mr-4">
-            <Logo />
-          </div>
+      className={`fixed inset-x-0 top-0 z-30 overflow-hidden transition-[height,box-shadow] duration-300 ease-out ${
+        top ? "h-20 md:h-28 xl:h-[156px]" : "h-20 md:h-24 shadow-lg"
+      }`}
+    >
+      <Image
+        src="/ems27/fondo-banner.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center -z-10"
+      />
 
-          {/* Desktop navigation */}
-          <nav className="hidden md:flex md:grow ">
-            {/* Desktop sign in links */}
-            <ul className="flex grow justify-end flex-wrap items-center">
-              <li>
-                <Link
-                  href="#contact"
-                  className="font-medium text-blackEms hover:text-white px-5 py-3 flex items-center transition duration-150 ease-in-out">
-                  Contactanos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#inscript"
-                  className="btn-sm text-gray-200 bg-blackEms hover:bg-gray-800 ml-3">
-                  <span>Inscribite</span>
-                  <svg
-                    className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1"
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                      fillRule="nonzero"
-                    />
-                  </svg>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+      <div className="mx-auto flex h-full max-w-[1500px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-[6%] min-[1700px]:px-0">
+        <Link href="/" className="flex items-center gap-4 xl:gap-6 shrink-0" aria-label="Inicio">
+          <Image
+            src="/ems27/logo.png"
+            alt="EMS"
+            width={218}
+            height={218}
+            priority
+            className={`h-auto transition-[width] duration-300 ease-out ${
+              top ? "w-[52px] md:w-[80px] xl:w-[109px]" : "w-[52px] md:w-[68px]"
+            }`}
+          />
+          <span className="hidden sm:block font-articulat font-medium text-ems-offwhite text-base leading-tight xl:text-[20px] xl:leading-[22px]">
+            Escuela de Ministerio
+            <br />
+            Sobrenatural
+          </span>
+        </Link>
 
-          <MobileMenu />
-        </div>
+        <nav className="flex items-center gap-6 xl:gap-12">
+          <Link
+            href="/#contact"
+            className="hidden md:block font-articulat font-medium text-ems-offwhite text-lg xl:text-[24px] xl:leading-[26px] underline-offset-8 decoration-2 hover:underline"
+          >
+            Contactanos
+          </Link>
+          <Link
+            href="/inscripcion"
+            className="group inline-flex items-center justify-center gap-2 xl:gap-3 rounded-[10px] border-2 xl:border-[3px] border-ems-offwhite px-4 h-10 md:h-12 xl:h-[58px] xl:w-[230px] font-articulat font-bold uppercase text-ems-offwhite text-sm md:text-base xl:text-[24px] transition-colors duration-300 ease-out hover:bg-ems-offwhite hover:text-ems-blue"
+          >
+            Inscribite
+            <svg
+              className="w-4 xl:w-6 transition-transform duration-300 ease-out group-hover:translate-x-1"
+              viewBox="0 0 24 14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M1 7h21M16 1l6 6-6 6" />
+            </svg>
+          </Link>
+        </nav>
       </div>
     </header>
   );

@@ -1,113 +1,91 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { GarabatoSmiley, GarabatoHighlight, GarabatoSparkle } from "./ui/garabatos";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
+
+const contenedor: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const boton =
+  "flex h-14 xl:h-[65px] w-full items-center justify-center gap-2 rounded-[10px] font-articulat font-medium text-lg xl:text-[22px] transition-colors duration-300 ease-out";
 
 export default function Hero() {
-
-	
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* Background Elements */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none">
-          {/* Subtle Dot Pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50"></div>
-          
-          {/* Brand Glow - Top Center */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-ems-primary/10 blur-[120px] rounded-full mix-blend-multiply"></div>
+    <section className="relative bg-white">
+      <motion.div
+        className="mx-auto max-w-[1053px] px-4 sm:px-6 pt-32 md:pt-40 xl:pt-[254px] pb-14 xl:pb-[72px] text-center"
+        initial="hidden"
+        animate="visible"
+        variants={contenedor}
+      >
+        <motion.h1 id="home" variants={item}>
+          <Image
+            src="/ems27/ems27.png"
+            alt="EMS'27"
+            width={1190}
+            height={345}
+            priority
+            className="mx-auto h-auto w-[min(595px,82vw)]"
+          />
+          <span className="sr-only">Escuela de Ministerio Sobrenatural 2027</span>
+        </motion.h1>
 
-          {/* Garabatos (Sparingly applied) */}
-          <div className="hidden md:block pointer-events-none z-0">
-            <GarabatoSparkle className="absolute top-40 left-[18%] md:left-[18%] text-ems-yellow opacity-60 scale-75 md:scale-100" />
-            <GarabatoHighlight className="absolute top-[18%] md:top-[25%] right-[0%] md:right-[10%] text-ems-lightBlue opacity-40 -rotate-6 scale-50 md:scale-100" />
-            <GarabatoSmiley className="absolute bottom-16 md:bottom-16 left-[5%] md:left-[25%] text-ems-gold opacity-50 -rotate-12 scale-50 md:scale-75" />
-          </div>
-      </div>
+        <motion.p
+          variants={item}
+          className="mx-auto mt-8 xl:mt-[66px] max-w-[932px] font-articulat font-medium text-ems-muted text-lg leading-relaxed md:text-2xl md:leading-[1.55] xl:text-[28px] xl:leading-[45px]"
+        >
+          Nuestra misión es formar a los creyentes en su identidad como hijos de un buen Padre, y
+          como resultado de esta relación, puedan co-participar con Él en la manifestación de su
+          reino en cada lugar donde se muevan.
+        </motion.p>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-          
-          <motion.div 
-              className="text-center pb-12 md:pb-16"
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
+        <motion.div
+          variants={item}
+          className="mx-auto mt-10 xl:mt-[85px] grid max-w-xs gap-4 sm:max-w-none sm:grid-cols-3 sm:gap-6 xl:gap-[45px]"
+        >
+          <Link href="#testimonios" className={`${boton} bg-ems-blue text-white hover:bg-[#5F86F5]`}>
+            Testimonios
+          </Link>
+          <Link href="/inscripcion" className={`${boton} bg-ems-sun text-white hover:bg-[#F0B400]`}>
+            Inscripciones
+          </Link>
+          <a
+            href="/documents/EMS Temario 2026.pdf"
+            download="EMS_Temario.pdf"
+            className={`${boton} border-[3px] border-ems-blue text-ems-blue hover:bg-ems-blue hover:text-white`}
           >
-            <motion.h1 
-              id="home"
-              className="text-5xl md:text-7xl font-extrabold text-ems-primary mb-6 leading-tight tracking-tight drop-shadow-sm"
-              variants={itemVariants}
-            >
-                Escuela de Ministerio Sobrenatural
-            </motion.h1>
+            <svg className="h-5 w-5 xl:h-6 xl:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14" />
+            </svg>
+            Temario EMS
+          </a>
+        </motion.div>
 
-            <div className="max-w-3xl mx-auto">
-              <motion.p
-                className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed"
-                variants={itemVariants}
-              >
-                Nuestra misión es formar a los creyentes en su identidad como
-                hijos de un buen Padre, y como resultado de esta relación,
-                puedan co-participar con Él en la manifestación de su reino en
-                cada lugar donde se muevan.
-              </motion.p>
-              
-              <div
-                className="max-w-xs mx-auto sm:max-w-none grid grid-cols-1 sm:grid-cols-3 gap-4"
-              >
-                <motion.div variants={itemVariants} className="w-full">
-                  <a
-                    className="btn text-white bg-ems-gold hover:bg-ems-gold/90 w-full px-4 py-4 shadow-lg shadow-ems-gold/40 hover:shadow-ems-gold/60 transition-all duration-300 transform hover:-translate-y-0.5 rounded-lg text-lg text-center"
-                    href="#testimonios">
-                    Testimonios
-                  </a>
-                </motion.div>
-                <motion.div variants={itemVariants} className="w-full">
-                  <a
-                    className="btn text-white bg-gray-900 hover:bg-gray-800 w-full px-4 py-4 shadow-lg shadow-gray-900/40 hover:shadow-gray-900/60 transition-all duration-300 transform hover:-translate-y-0.5 rounded-lg text-lg text-center"
-                    href="#inscript">
-                    Inscripciones
-                  </a>
-                </motion.div>
-                <motion.div variants={itemVariants} className="w-full">
-                  <a
-                    className="btn text-white bg-ems-primary hover:bg-ems-primary/90 w-full px-4 py-4 shadow-lg shadow-ems-primary/40 hover:shadow-ems-primary/60 transition-all duration-300 transform hover:-translate-y-0.5 rounded-lg text-lg flex items-center justify-center gap-2"
-                    href="/documents/EMS Temario 2026.pdf"
-                    download="EMS_Temario_2026.pdf">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                    <span>Temario EMS</span>
-                  </a>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+        <motion.div variants={item} className="mt-12 xl:mt-[52px] flex flex-col items-center gap-5 xl:gap-[27px]">
+          <Image
+            src="/ems27/globo.png"
+            alt=""
+            width={290}
+            height={229}
+            className="h-auto w-[110px] xl:w-[145px]"
+          />
+          <Image
+            src="/ems27/iconos.png"
+            alt=""
+            width={589}
+            height={135}
+            className="h-auto w-[190px] xl:w-[229px]"
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

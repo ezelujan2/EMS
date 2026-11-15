@@ -15,6 +15,11 @@ module.exports = {
           lightBlue: "#81A9BE",
           beige: "#DAD4BB",
           yellow: "#E4DD50",
+          // Identidad EMS'27
+          blue: "#799DFF",
+          sun: "#FFC400",
+          offwhite: "#F3F8F3",
+          muted: "#959595",
         },
         blackEms: '#262626',
         gray: {
@@ -71,6 +76,8 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
+        // Fuente del diseño EMS'27. Hasta tener los archivos de Articulat CF, cae en Inter.
+        articulat: ["'Articulat CF'", "var(--font-inter)", "sans-serif"],
         'ems-light': ['ems-lazydog', 'sans-serif'],
         'ems-light-oblique': ['ems-lazydog', 'sans-serif'],
         'ems-bold': ['ems-bristol', 'sans-serif'],

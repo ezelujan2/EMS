@@ -1,488 +1,133 @@
 "use client";
 
-import { useState, useRef, useEffect, Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { GarabatoCloud, GarabatoSparkle } from "./ui/garabatos";
+import TituloSeccion from "./ui/titulo-seccion";
+
+const VALORES = [
+  {
+    titulo: "Presencia",
+    icono: "/ems27/icono-nube.png",
+    foto: "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03646_lft1id.jpg",
+    video: "/videos/Eze.mp4",
+    texto:
+      "Honramos la presencia de Dios y buscamos cultivar ambientes donde Él sea el centro. En ese lugar lo conocemos y descubrimos más de su bondad, de su belleza, de quién es Él. Mientras más lo conocemos, más experimentamos su verdad y su cercanía.",
+  },
+  {
+    titulo: "Poder",
+    icono: "/ems27/icono-fuego.png",
+    foto: "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03837_i3grjt.jpg",
+    video: "/videos/Dani.mp4",
+    texto:
+      "Llamados a una vida de impacto y propósito al servicio del Reino de Dios, porque el evangelio son buenas nuevas, y esas buenas nuevas no vienen separadas de su poder. Fuimos creados para vivir una vida sobrenatural.",
+  },
+  {
+    titulo: "Comunidad",
+    icono: "/ems27/icono-carita.png",
+    foto: "https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737719606/DSC03854_ynl6ml.jpg",
+    video: "/videos/Flor.mp4",
+    texto:
+      "Fuimos creados para vivir en su cuerpo, la iglesia. Esa familia y comunidad, donde somos conocidos y podemos conocer más a Jesús, donde Él se encarna en la manifestación de su cuerpo y podemos ver la simpleza de la gracia y el poder de la vulnerabilidad.",
+  },
+  {
+    titulo: "Transformación",
+    icono: "/ems27/icono-paloma.png",
+    foto: "https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1705459547/poder_nro5cd.jpg",
+    video: "/videos/Patri.mp4",
+    texto:
+      "Mientras más conocemos a Dios, más conocemos quiénes somos como hijos. En su presencia somos transformados a la imagen de Jesús, el Hijo, que nos mostró lo que de verdad era vivir en una plena comunión con el Padre. Él siempre nos lleva al diseño original.",
+  },
+];
 
 export default function Features() {
-  // const [tab, setTab] = useState<number>(1);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [video, setVideo] = useState<{ src: string; titulo: string } | null>(null);
 
-  const [modalOpen1, setModalOpen1] = useState<boolean>(false);
-  const [modalOpen2, setModalOpen2] = useState<boolean>(false);
-  const [modalOpen3, setModalOpen3] = useState<boolean>(false);
-  const [modalOpen4, setModalOpen4] = useState<boolean>(false);
+  function abrirVideo(src: string, titulo: string) {
+    setVideo({ src, titulo });
+    dialogRef.current?.showModal();
+  }
 
-  const videoRef1 = useRef<HTMLVideoElement>(null);
-  const videoRef2 = useRef<HTMLVideoElement>(null);
-  const videoRef3 = useRef<HTMLVideoElement>(null);
-  const videoRef4 = useRef<HTMLVideoElement>(null);
-
-  const width = "100%";
-  const height = "75vw";
-
-        
-        const thumbWidth=768
-        const thumbHeight=432
-        const thumbAlt="Modal video thumbnail"
-        const videoWidth=1920
-        const videoHeight=1080
-
-  const tabs = useRef<HTMLDivElement>(null);
-
-  const heightFix = () => {
-    if (tabs.current && tabs.current.parentElement)
-      tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`;
-  };
-
-  useEffect(() => {
-    heightFix();
-  }, []);
+  function cerrarVideo() {
+    videoRef.current?.pause();
+    dialogRef.current?.close();
+  }
 
   return (
-    <section id='values' className="relative">
-      {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div
-        className="absolute inset-0 bg-gray-100 pointer-events-none mb-16"
-        aria-hidden="true"></div>
-      <div className="absolute left-0 right-0 m-auto w-px p-px h-16 bg-gray-200 transform -translate-y-1/2 top-4"></div>
+    <section id="values" className="px-4 sm:px-6 pt-20 md:pt-32 scroll-mt-24">
+      <TituloSeccion titulo="¿Qué es la EMS?">
+        La identidad de la EMS. Cada valor es un pilar de compromiso. Estos principios son más que
+        palabras: son el núcleo de nuestra misión como escuela.
+      </TituloSeccion>
 
-      <div className="relative max-w-full mx-auto px-4 sm:px-6">
-        <div className="pt-12 md:pt-20">
-          {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="text-4xl md:text-7xl mb-4">
-              Qué es la EMS?
-            </h1>
-            <p className="text-md md:text-xl text-gray-600">
-              La identidad de la EMS. Cada valor es un pilar de compromiso.
-              Estos principios son más que palabras; son el núcleo de nuestra
-              misión como escuela.
-            </p>
-          </div>
-        </div>
-        {/* Row 1: Presencia (Text Left, Image Right) */}
-        <div className="flex md:flex-row flex-col-reverse overflow-hidden">
-          {/* Columna 1 (Text) - Slide from Left */}
-          <motion.div 
-            className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+      <div className="mx-auto mt-14 md:mt-24 max-w-[1300px] space-y-16 md:space-y-28">
+        {VALORES.map((v, i) => (
+          <motion.article
+            key={v.titulo}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="grid items-center gap-8 md:gap-16 md:grid-cols-[3fr_2fr]"
           >
-            <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
-              <h1 className="text-4xl md:text-5xl text-center mb-4">
-                Presencia
-              </h1>
-              <div className="text-gray-600 md:text-lg text-sm text-center md:justify-start">
-                Honramos la presencia de Dios y buscamos cultivar ambientes
-                donde Él sea el centro. En ese lugar lo conocemos y descubrimos
-                más de su bondad, de su belleza, de quién es Él. Mientras más lo
-                conocemos, más experimentamos su verdad y su cercanía.
-              </div>
-              <a onClick={() => {
-              setModalOpen1(true);
-            }}>
-              <svg
-                className="mt-2"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fillRule="evenodd"
-                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M16 12L10 16.3301V7.66987L16 12Z"
-                  fill="currentColor"
-                />
-              </svg>
-              </a >
-              <Transition
-        show={modalOpen1}
-        as={Fragment}
-        afterEnter={() => videoRef1.current?.play()}>
-        <Dialog initialFocus={videoRef1} onClose={() => setModalOpen1(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  // ref={videoRef}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src="/videos/Eze.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
-            </div>
-          </motion.div>
-          {/* Columna 2 (Image) - Slide from Right */}
-          <motion.div 
-            className="w-full md:w-3/5"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              className="w-full rounded relative z-10"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03646_lft1id.jpg"
-              alt="presencia"
+              src={v.foto}
+              alt={v.titulo}
+              loading="lazy"
+              className={`w-full aspect-[3/2] object-cover rounded-[10px] ${i % 2 ? "md:order-2" : ""}`}
             />
-            {/* Added Sparse Grabato Decor */}
-            <GarabatoSparkle className="absolute -bottom-2 md:-bottom-6 -right-2 md:-right-6 text-ems-yellow opacity-50 hidden md:block scale-75 md:scale-100" />
-          </motion.div>
-        </div>
-
-        {/* Row 2: Poder (Image Left, Text Right) */}
-        <div className="mt-10 flex md:flex-row flex-col overflow-hidden">
-          {/* Columna 1 (Image) - Slide from Left */}
-          <motion.div 
-            className="w-full md:w-3/5"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <img
-              className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737731807/DSC03837_i3grjt.jpg"
-              alt="poder"
-            />
-          </motion.div>
-          {/* Columna 2 (Text) - Slide from Right */}
-          <motion.div 
-            className="w-full md:w-2/5 mx-auto m-2 md:m-0 flex justify-center items-center"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 md:w-11/12">
-              <h1 className="text-4xl md:text-5xl text-center">
-                Poder
-              </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm text-center md:justify-start">
-			  Llamados a una vida de impacto y propósito al servicio del Reino de Dios, porque el evangelio, son buenas nuevas, y esas buenas nuevas, no vienen separadas de su poder.
-			  Fuimos creados para vivir una vida sobrenatural.
-
-              </div>
-              <a onClick={() => {
-              setModalOpen2(true);
-            }}>
-              <svg
-                className="mt-2"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fillRule="evenodd"
-                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M16 12L10 16.3301V7.66987L16 12Z"
-                  fill="currentColor"
-                />
-              </svg>
-              </a >
-              <Transition
-        show={modalOpen2}
-        as={Fragment}
-        afterEnter={() => videoRef2.current?.play()}>
-        <Dialog initialFocus={videoRef2} onClose={() => setModalOpen2(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef2}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src="/videos/Dani.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
+            <div className="font-articulat">
+              <Image src={v.icono} alt="" width={64} height={64} className="h-12 w-auto md:h-14" />
+              <h3 className="mt-5 font-bold text-ems-blue text-4xl md:text-5xl">{v.titulo}</h3>
+              <p className="mt-4 font-medium text-ems-muted text-lg md:text-xl leading-relaxed">
+                {v.texto}
+              </p>
+              <button
+                type="button"
+                onClick={() => abrirVideo(v.video, v.titulo)}
+                className="mt-7 inline-flex items-center gap-3 rounded-[10px] border-[3px] border-ems-blue px-6 h-14 font-medium text-ems-blue text-lg transition-colors duration-300 ease-out hover:bg-ems-blue hover:text-white"
+              >
+                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M8 5.5v13a1 1 0 001.5.86l11-6.5a1 1 0 000-1.72l-11-6.5A1 1 0 008 5.5z" />
+                </svg>
+                Ver testimonio
+              </button>
             </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Row 3: Comunidad (Text Left, Image Right) */}
-        <div className="mt-10 flex flex-col-reverse md:flex-row items-center h-full overflow-hidden">
-          {/* Columna 1 (Text) - Slide from Left */}
-          <motion.div 
-            className="w-full md:w-2/5 mx-auto mb-4 md:mb-0 md:items-center flex items-center justify-center"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="relative rounded border bg-white shadow-md border-gray-200 p-4 md:p-5 m-2 md:m-10 mt-5 z-10">
-              <GarabatoCloud className="absolute -top-6 md:-top-10 -left-6 md:-left-10 text-ems-lightBlue opacity-40 hidden md:block scale-50 md:scale-100" />
-              <h1 className="text-4xl md:text-5xl text-center mb-4">
-                Comunidad
-              </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
-			  Fuimos creados para vivir en su cuerpo, la iglesia. Esa familia y comunidad, donde somos conocidos y podemos conocer más a Jesús, donde Él se encarna en la manifestación de su cuerpo y podemos ver la simpleza de la gracia y el poder de la vulnerabilidad. 
-              </div>
-              <a onClick={() => {
-              setModalOpen3(true);
-            }}>
-              <svg
-                className="mt-2 m-auto"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fillRule="evenodd"
-                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M16 12L10 16.3301V7.66987L16 12Z"
-                  fill="currentColor"
-                />
-              </svg>
-              </a >
-              <Transition
-        show={modalOpen3}
-        as={Fragment}
-        afterEnter={() => videoRef3.current?.play()}>
-        <Dialog initialFocus={videoRef3} onClose={() => setModalOpen3(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef3}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src="/videos/Flor.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
-               
-            </div>
-          </motion.div>
-          {/* Columna 2 (Image) - Slide from Right */}
-          <motion.div 
-            className="w-full md:w-3/5"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <img
-              className="w-full rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/v1737719606/DSC03854_ynl6ml.jpg"
-              alt="comunidad"
-            />
-          </motion.div>
-        </div>
-
-        {/* Row 4: Transformación (Image Left, Text Right) */}
-        <div className="mt-10 flex md:flex-row flex-col overflow-hidden">
-          {/* Columna 1 (Image) - Slide from Left */}
-          <motion.div 
-            className="w-full md:w-3/5"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <img
-              className="w-full  rounded"
-              src="https://res.cloudinary.com/dmoqzhgjk/image/upload/t_Valores EMS/v1705459547/poder_nro5cd.jpg"
-              alt="Transformacion"
-            />
-          </motion.div>
-          {/* Columna 2 (Text) - Slide from Right */}
-          <motion.div 
-            className="w-11/12 m-2 md:m-0 md:w-2/5 flex justify-center items-center mx-4"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="rounded flex flex-col items-center p-5 border bg-white shadow-md border-gray-200 m-10">
-              <h1 className="text-4xl md:text-5xl text-center">
-                Transformación
-              </h1>
-              <div className="text-gray-600 mt-3 md:text-lg text-sm justify-center md:justify-start">
-			  Mientras más conocemos a Dios, más conocemos quienes somos como hijos. En su presencia somos transformados a la imagen de Jesús, el Hijo, que nos mostró lo que de verdad era vivir en una plena comunión con el Padre. El siempre nos lleva al diseño original.
-              </div>
-              <a onClick={() => {
-              setModalOpen4(true);
-            }}>
-              <svg
-                className="mt-2"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fillRule="evenodd"
-                  d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M16 12L10 16.3301V7.66987L16 12Z"
-                  fill="currentColor"
-                />
-              </svg>
-              </a >
-              <Transition
-        show={modalOpen4}
-        as={Fragment}
-        afterEnter={() => videoRef4.current?.play()}>
-        <Dialog initialFocus={videoRef4} onClose={() => setModalOpen4(false)}>
-          {/* Modal backdrop */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] bg-black bg-opacity-75 transition-opacity"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            aria-hidden="true"
-          />
-          {/* End: Modal backdrop */}
-
-          {/* Modal dialog */}
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 z-[99999] overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ttransition ease-out duration-200"
-            leaveFrom="oopacity-100 scale-100"
-            leaveTo="opacity-0 scale-95">
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh] bg-black overflow-hidden">
-                <video
-                className="md:w-[100vh] md:max-h-[100vh] max-h-[50vh] w-[50vh]"
-                  ref={videoRef4}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls>
-                  <source src="/videos/Patri.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Dialog.Panel>
-            </div>
-          </Transition.Child>
-          {/* End: Modal dialog */}
-        </Dialog>
-              </Transition>
-            </div>
-          </motion.div>
-        </div>
+          </motion.article>
+        ))}
       </div>
-      <div id="testimonios" />
+
+      <dialog
+        ref={dialogRef}
+        aria-label={video ? `Video: ${video.titulo}` : "Video"}
+        onClose={() => videoRef.current?.pause()}
+        onClick={(e) => e.target === dialogRef.current && cerrarVideo()}
+        className="w-auto max-w-[min(92vw,1100px)] bg-transparent p-0 backdrop:bg-black/80"
+      >
+        <div className="relative">
+          <button
+            type="button"
+            onClick={cerrarVideo}
+            className="absolute -top-12 right-0 font-articulat font-medium text-white text-lg hover:underline"
+          >
+            Cerrar ✕
+          </button>
+          {video && (
+            <video
+              ref={videoRef}
+              key={video.src}
+              src={video.src}
+              controls
+              autoPlay
+              playsInline
+              className="max-h-[80vh] w-full rounded-[10px] bg-black"
+            />
+          )}
+        </div>
+      </dialog>
     </section>
   );
 }
