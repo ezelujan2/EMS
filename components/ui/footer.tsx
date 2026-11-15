@@ -6,6 +6,7 @@ const EMAIL = "infoescuelams@gmail.com";
 const LINKS = [
   { href: "/inscripcion", texto: "Inscripción" },
   { href: "/#values", texto: "Nuestros valores" },
+  { href: "/#misiones", texto: "Viajes misioneros" },
   { href: "/#testimonios", texto: "Testimonios" },
   { href: "/documents/EMS Temario 2026.pdf", texto: "Temario" },
 ];

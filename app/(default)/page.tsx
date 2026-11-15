@@ -19,7 +19,7 @@ export default function Home() {
       <Hero />
       <ModalVideo />
       <Features />
-	  {/* <MissionTrips /> */}
+      <MissionTrips />
       <Testimonials />
       <Newsletter />
     </>
