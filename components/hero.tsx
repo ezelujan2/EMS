@@ -58,8 +58,8 @@ export default function Hero() {
             Inscripciones
           </Link>
           <a
-            href="/documents/EMS Temario 2026.pdf"
-            download="EMS_Temario.pdf"
+            href="/documents/temario-ems-2027.pdf"
+            download="EMS Temario 2027.pdf"
             className={`${boton} border-[3px] border-ems-blue text-ems-blue hover:bg-ems-blue hover:text-white`}
           >
             <svg className="h-5 w-5 xl:h-6 xl:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>

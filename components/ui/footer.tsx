@@ -9,7 +9,7 @@ const LINKS = [
   { href: "/#values", texto: "Nuestros valores" },
   { href: "/#misiones", texto: "Viajes misioneros" },
   { href: "/#testimonios", texto: "Testimonios" },
-  { href: "/documents/EMS Temario 2026.pdf", texto: "Temario" },
+  { href: "/documents/temario-ems-2027.pdf", texto: "Temario" },
 ];
 
 export default function Footer() {
