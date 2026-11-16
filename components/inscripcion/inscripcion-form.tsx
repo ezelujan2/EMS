@@ -10,14 +10,27 @@ import {
 } from "react";
 import Link from "next/link";
 import {
-  APPS_SCRIPT_URL,
   AÑOS_CURSADO,
   CICLO,
+  COMO_NOS_CONOCISTE,
   DOCUMENTOS,
+  DOMINIOS_MAIL,
   EMAIL_CONTACTO,
   LOCALIDADES,
   MAX_ARCHIVO_MB,
 } from "./config";
+import {
+  aBase64,
+  borrarCarta,
+  enviar,
+  errorArchivo,
+  guardarCarta,
+  leerCarta,
+  ponerEnInput,
+  prepararArchivo,
+  type Respuesta,
+} from "./archivos";
+import type { Documento } from "./config";
 
 const PASOS = ["Datos personales", "Inscripción", "Iglesia", "Salud", "Carta pastoral", "Revisión"];
 const PASO_CARTA = 4;
@@ -25,6 +38,8 @@ const REVISION = PASOS.length - 1;
 
 const HONEYPOT = "_website";
 const OTRA = "__otra";
+const ENTREGA = "Carta pastoral - entrega";
+const DESPUES = "La subo después";
 const STORAGE_KEY = "ems-inscripcion-borrador";
 
 type Estado = "editando" | "enviando" | "enviado" | "error";
@@ -49,12 +64,14 @@ export default function InscripcionForm() {
   const [paso, setPaso] = useState(0);
   const [maxPaso, setMaxPaso] = useState(0);
   const [estado, setEstado] = useState<Estado>("editando");
-  const [error, setError] = useState("");
+  const [aviso, setAviso] = useState<{ titulo: string; texto: string } | null>(null);
   const [errores, setErrores] = useState<Datos>({});
   const [borrador, setBorrador] = useState<Datos>({});
   const [restaurado, setRestaurado] = useState(false);
   const [guardado, setGuardado] = useState(false);
   const [resumen, setResumen] = useState<Seccion[]>([]);
+  const [resultado, setResultado] = useState<Respuesta | null>(null);
+  const [anio, setAnio] = useState(""); // año de cursado elegido: define qué matrícula se muestra
 
   // Recupera lo que la persona ya había completado en este dispositivo.
   useEffect(() => {
@@ -66,6 +83,7 @@ export default function InscripcionForm() {
         // La carta pastoral no se puede guardar: como mucho volvemos a ese paso.
         const p = Math.min(g.paso || 0, PASO_CARTA);
         setBorrador(g.datos);
+        setAnio(g.datos["Año de cursado"] ?? "");
         setPaso(p);
         setMaxPaso(Math.min(g.maxPaso ?? p, PASO_CARTA));
         setRestaurado(true);
@@ -99,6 +117,8 @@ export default function InscripcionForm() {
   function empezarDeCero() {
     if (!confirm("¿Borrar todas las respuestas y empezar de nuevo?")) return;
     borrarBorrador();
+    borrarCarta();
+    setAnio("");
     setBorrador({});
     setErrores({});
     setPaso(0);
@@ -131,6 +151,7 @@ export default function InscripcionForm() {
     let primero: Control | null = null;
     for (const el of controles(n)) {
       if (!el.name || el.name === HONEYPOT) continue;
+      ponerValor(el, normalizar(el)); // por si se tocó "Siguiente" con Enter, sin salir del campo
       const msg = mensajeError(el);
       if (msg && !nuevos[el.name]) {
         nuevos[el.name] = msg;
@@ -164,12 +185,15 @@ export default function InscripcionForm() {
           if (el.type === "radio") {
             v = form.querySelector<HTMLInputElement>(`input[name="${CSS.escape(el.name)}"]:checked`)?.value ?? "";
           } else if (el instanceof HTMLInputElement && el.type === "checkbox") {
-            v = el.checked ? "Leído y aceptado" : "";
+            v = el.checked ? el.value : "";
           } else if (el instanceof HTMLInputElement && el.type === "file") {
             v = el.files?.[0]?.name ?? "";
-          } else if (el.tagName === "SELECT" && v === "Otra") {
+          } else if (el instanceof HTMLInputElement && el.type === "date") {
+            v = fechaLegible(v);
+          }
+          if (v === "Otra" || v === "Otro") {
             const otra = form.elements.namedItem(el.name + OTRA) as HTMLInputElement | null;
-            v = `Otra: ${otra?.value ?? ""}`;
+            v = `${v}: ${otra?.value ?? ""}`;
           }
           items.push([el.dataset.resumen!, v.trim() || "Sin completar"]);
         });
@@ -194,6 +218,7 @@ export default function InscripcionForm() {
 
   function onChange(e: React.FormEvent<HTMLFormElement>) {
     const el = e.target as unknown as Control;
+    if (el.name === "Año de cursado") setAnio(el.value);
     // Radios, checkboxes y selects se validan al elegir; el resto, si ya tenía error.
     const inmediato = ["radio", "checkbox", "file", "select-one"].includes(el.type);
     revalidar(el, inmediato);
@@ -204,7 +229,8 @@ export default function InscripcionForm() {
     const el = e.target as unknown as Control;
     if (!("validity" in el) || !el.name) return;
     // Al salir del campo solo marcamos errores de formato, no los vacíos.
-    if (el.value.trim()) revalidar(el, true);
+    ponerValor(el, normalizar(el));
+    if (el.value) revalidar(el, true);
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -228,7 +254,7 @@ export default function InscripcionForm() {
     }
 
     setEstado("enviando");
-    setError("");
+    setAviso(null);
 
     try {
       const campos: Datos = {};
@@ -242,41 +268,55 @@ export default function InscripcionForm() {
         }
       });
       for (const k of Object.keys(campos)) {
-        // "Otra" localidad: junta el select con el texto escrito.
+        // "Otra"/"Otro": junta la opción elegida con el texto escrito.
         if (k.endsWith(OTRA)) {
           const base = k.slice(0, -OTRA.length);
-          if (campos[base] === "Otra") campos[base] = `Otra: ${campos[k]}`;
+          if (campos[base] === "Otra" || campos[base] === "Otro") campos[base] = `${campos[base]}: ${campos[k]}`;
           delete campos[k];
         }
         // Auxiliares de las preguntas Sí/No (ya combinados en el campo principal).
         if (k.endsWith("__op") || k.endsWith("__detalle")) delete campos[k];
       }
 
-      if (!APPS_SCRIPT_URL) throw new Error("Falta configurar APPS_SCRIPT_URL");
+      campos["DNI"] = (campos["DNI"] ?? "").replace(/\D/g, "");
+      campos["Fecha de nacimiento"] = fechaLegible(campos["Fecha de nacimiento"] ?? "");
 
-      const payload = {
+      const json = await enviar({
+        accion: "inscripcion",
         ciclo: CICLO,
         campos,
-        archivo: archivo ? await leerArchivo(archivo) : null,
-      };
-
-      // Sin Content-Type explícito el navegador manda text/plain y
-      // evita el preflight CORS, que Apps Script no soporta.
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(payload),
+        archivo: archivo ? await aBase64(archivo) : null,
       });
-      const json = await res.json();
-      if (!json.ok) throw new Error(json.error || "Error desconocido");
+
+      if (!json.ok) {
+        if (json.codigo === "cerradas") {
+          setAviso({ titulo: "Las inscripciones están cerradas", texto: json.error || "" });
+          setEstado("error");
+          return;
+        }
+        if (json.codigo === "duplicado") {
+          const dato = json.campo === "mail" ? `el mail ${campos["Mail"]}` : `el DNI ${campos["DNI"]}`;
+          setAviso({
+            titulo: "Ya hay una inscripción con estos datos",
+            texto: `Ya existe una inscripción para el ciclo ${CICLO} con ${dato}. No hace falta que te inscribas de nuevo. Si necesitás corregir algún dato, escribinos a ${EMAIL_CONTACTO}.`,
+          });
+          setEstado("error");
+          return;
+        }
+        throw new Error(json.error || "Error desconocido");
+      }
 
       borrarBorrador();
+      borrarCarta();
+      setResultado(json);
       setEstado("enviado");
       topRef.current?.scrollIntoView({ block: "start" });
     } catch (err) {
       console.error(err);
-      setError(
-        `No se pudo enviar la inscripción. Tus respuestas quedaron guardadas: intentá de nuevo en unos minutos o escribinos a ${EMAIL_CONTACTO}.`
-      );
+      setAviso({
+        titulo: "No se pudo enviar la inscripción",
+        texto: `Tus respuestas quedaron guardadas en este dispositivo. Revisá tu conexión e intentá de nuevo en unos minutos. Si sigue sin funcionar, escribinos a ${EMAIL_CONTACTO}.`,
+      });
       setEstado("error");
     }
   }
@@ -284,7 +324,7 @@ export default function InscripcionForm() {
   if (estado === "enviado") {
     return (
       <div ref={topRef} className="scroll-mt-28">
-        <Exito />
+        <Exito linkCarta={resultado?.linkCarta} />
       </div>
     );
   }
@@ -323,12 +363,14 @@ export default function InscripcionForm() {
               mensaje="Escribí tu nombre y tu apellido."
             />
             <Texto
-              name="Mail"
-              type="email"
-              autoComplete="email"
-              inputMode="email"
-              ayuda="Preferentemente una cuenta de Gmail. Te vamos a escribir a esta dirección."
+              name="DNI"
+              inputMode="numeric"
+              ayuda="Solo números, sin puntos."
+              pattern="\d{7,8}"
+              mensaje="Ingresá un DNI válido (7 u 8 números)."
             />
+            <FechaNacimiento />
+            <Mail />
             <Texto
               name="Teléfono"
               type="tel"
@@ -349,12 +391,29 @@ export default function InscripcionForm() {
 
           <Paso n={1} actual={paso} titulo="Inscripción" descripcion={`Ciclo lectivo ${CICLO}.`}>
             <Opciones name="Año de cursado" label="¿A qué año te inscribís?" opciones={AÑOS_CURSADO} />
+            <Opciones
+              name="Cómo conoció la EMS"
+              label="¿Cómo conociste la EMS?"
+              opciones={COMO_NOS_CONOCISTE}
+              columnas={2}
+            />
             <div className="space-y-3">
               <Etiqueta>Documentos</Etiqueta>
               <p className="text-sm text-gray-500 -mt-1">Abrí y leé cada documento para poder aceptarlo.</p>
-              <Acepto name="Matrícula" href={DOCUMENTOS.matricula} doc={`Matrícula ${CICLO}`} />
-              <Acepto name="Estilo de vida del avivador" href={DOCUMENTOS.estiloDeVida} doc="Estilo de vida del avivador" />
-              <Acepto name="Reglas y normas del alumno" href={DOCUMENTOS.reglasYNormas} doc="Reglas y normas del alumno" />
+              {anio ? (
+                // key: si cambia el año, la matrícula es otra y hay que volver a aceptarla.
+                <Acepto
+                  key={anio === "Tercer año" ? "m3" : "m12"}
+                  name="Matrícula"
+                  documento={anio === "Tercer año" ? DOCUMENTOS.matricula.tercero : DOCUMENTOS.matricula.general}
+                />
+              ) : (
+                <p className="rounded-[10px] border border-dashed border-gray-300 px-4 py-3 text-sm text-gray-500">
+                  La matrícula depende del año: elegí arriba a qué año te inscribís para verla.
+                </p>
+              )}
+              <Acepto name="Estilo de vida del avivador" documento={DOCUMENTOS.estiloDeVida} />
+              <Acepto name="Reglas y normas del alumno" documento={DOCUMENTOS.reglasYNormas} />
             </div>
           </Paso>
 
@@ -397,6 +456,10 @@ export default function InscripcionForm() {
               pattern="[\d\s()+\-]{8,}"
               mensaje="Ingresá un teléfono válido, con característica."
             />
+            <Casilla name="Consentimiento datos de salud" resumen="Consentimiento de datos de salud">
+              Autorizo a la EMS a usar mi información de salud únicamente para cuidarme durante el
+              cursado y las actividades de la escuela.
+            </Casilla>
           </Paso>
 
           <Paso n={PASO_CARTA} actual={paso} titulo="Recomendación pastoral">
@@ -404,7 +467,7 @@ export default function InscripcionForm() {
               {[
                 "Descargá la carta pastoral.",
                 "Pedile a tu pastor que la complete y la firme.",
-                "Subila acá en PDF o como foto.",
+                "Subila acá en PDF o como foto, o elegí subirla más tarde.",
               ].map((t, i) => (
                 <li key={t} className="flex gap-3">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ems-blue/15 text-sm font-bold text-ems-blue">
@@ -417,6 +480,7 @@ export default function InscripcionForm() {
             {DOCUMENTOS.cartaPastoral && (
               <a
                 href={DOCUMENTOS.cartaPastoral}
+                download="Carta pastoral EMS 2027.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium text-ems-blue underline underline-offset-4"
@@ -464,11 +528,12 @@ export default function InscripcionForm() {
             </div>
           </Paso>
 
-          {estado === "error" && (
-            <p role="alert" className="mt-8 rounded-[10px] border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
-              {error}
+          {aviso && (
+            <p className="mt-8 rounded-[10px] border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
+              {aviso.texto}
             </p>
           )}
+          <Aviso aviso={aviso} />
 
           {/* En celular la barra queda fija abajo para no tener que buscar el botón. */}
           <div className="sticky bottom-0 -mx-5 sm:-mx-10 mt-10 flex items-center justify-between gap-3 rounded-b-[10px] border-t border-gray-200 bg-white/95 px-5 sm:px-10 py-4 backdrop-blur sm:static sm:bg-white">
@@ -488,8 +553,10 @@ export default function InscripcionForm() {
             <button
               type="submit"
               disabled={estado === "enviando"}
-              className={`h-12 px-6 rounded-[10px] font-medium text-white transition-colors duration-300 disabled:opacity-60 disabled:cursor-wait ${
-                paso === REVISION ? "bg-ems-sun hover:bg-[#F0B400]" : "bg-ems-blue hover:bg-[#5F86F5]"
+              className={`h-12 px-6 rounded-[10px] font-semibold transition-colors duration-300 disabled:opacity-50 disabled:cursor-wait ${
+                paso === REVISION
+                  ? "bg-ems-sun text-gray-900 hover:bg-[#F0B400]"
+                  : "bg-ems-blueStrong text-white hover:bg-[#3A5BCC]"
               }`}
             >
               {estado === "enviando"
@@ -631,6 +698,8 @@ type TextoProps = {
   inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   pattern?: string;
   mensaje?: string;
+  min?: string;
+  max?: string;
 };
 
 function Texto({ name, label, ayuda, type = "text", mensaje, ...rest }: TextoProps) {
@@ -652,6 +721,48 @@ function Texto({ name, label, ayuda, type = "text", mensaje, ...rest }: TextoPro
         data-resumen={label ?? name}
         className={inputCls(error)}
         {...rest}
+      />
+      <MensajeError id={`${id}-error`} error={error} />
+    </div>
+  );
+}
+
+// Fecha de nacimiento siempre como dd/mm/aaaa (el campo de fecha del navegador
+// cambia de formato según el idioma del celular).
+function FechaNacimiento() {
+  const name = "Fecha de nacimiento";
+  const id = slug(name);
+  const error = useError(name);
+  const guardada = useBorrador(name);
+
+  function onInput(e: React.FormEvent<HTMLInputElement>) {
+    const el = e.currentTarget;
+    const borrando = (e.nativeEvent as InputEvent).inputType?.startsWith("delete");
+    if (!borrando) el.value = formatearFecha(el.value);
+    el.setCustomValidity(el.value.length === 10 ? errorFecha(el.value) : "");
+  }
+
+  return (
+    <div>
+      <Etiqueta htmlFor={id}>Fecha de nacimiento</Etiqueta>
+      <input
+        id={id}
+        name={name}
+        type="text"
+        inputMode="numeric"
+        autoComplete="bday"
+        placeholder="dd/mm/aaaa"
+        maxLength={10}
+        required
+        pattern="\d{2}/\d{2}/\d{4}"
+        data-msg="Escribí la fecha como dd/mm/aaaa, por ejemplo 25/03/2000."
+        defaultValue={guardada ? fechaLegible(guardada) : undefined}
+        onInput={onInput}
+        onBlur={(e) => e.currentTarget.setCustomValidity(errorFecha(e.currentTarget.value))}
+        aria-invalid={!!error}
+        aria-describedby={error ? `${id}-error` : undefined}
+        data-resumen="Fecha de nacimiento"
+        className={inputCls(error)}
       />
       <MensajeError id={`${id}-error`} error={error} />
     </div>
@@ -724,14 +835,26 @@ function Localidad({ name, label }: { name: string; label?: string }) {
   );
 }
 
-function Opciones({ name, label, opciones }: { name: string; label: string; opciones: string[] }) {
+function Opciones({
+  name,
+  label,
+  opciones,
+  columnas = 3,
+}: {
+  name: string;
+  label: string;
+  opciones: string[];
+  columnas?: 2 | 3;
+}) {
   const error = useError(name);
+  const errorOtro = useError(name + OTRA);
   const guardado = useBorrador(name);
+  const [otro, setOtro] = useState(guardado === "Otro");
   const id = slug(name);
   return (
     <div role="radiogroup" aria-labelledby={`${id}-label`}>
       <Etiqueta id={`${id}-label`}>{label}</Etiqueta>
-      <div className="grid gap-2 sm:grid-cols-3">
+      <div className={`grid gap-2 ${columnas === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}>
         {opciones.map((op) => (
           <label key={op} className={`${opcionCls} ${error ? "border-red-400" : ""}`}>
             <input
@@ -741,31 +864,147 @@ function Opciones({ name, label, opciones }: { name: string; label: string; opci
               required
               defaultChecked={guardado === op}
               data-resumen={label}
+              onChange={() => setOtro(op === "Otro")}
               className={radioCls}
             />
             {op}
           </label>
         ))}
       </div>
+      {otro && (
+        <input
+          name={name + OTRA}
+          required
+          placeholder="Contanos cuál"
+          defaultValue={useBorrador(name + OTRA)}
+          aria-label={`${label}: otro`}
+          aria-invalid={!!errorOtro}
+          className={`${inputCls(errorOtro)} mt-2`}
+          autoFocus={guardado !== "Otro"}
+        />
+      )}
+      <MensajeError error={error ?? errorOtro} />
+    </div>
+  );
+}
+
+// Casilla simple (sin documento para leer).
+function Casilla({ name, resumen, children }: { name: string; resumen: string; children: ReactNode }) {
+  const error = useError(name);
+  return (
+    <div>
+      <label className={`${opcionCls} items-start ${error ? "border-red-400" : ""}`}>
+        <input
+          type="checkbox"
+          name={name}
+          value="Autorizado"
+          required
+          data-msg="Tenés que dar tu autorización para continuar."
+          defaultChecked={!!useBorrador(name)}
+          data-resumen={resumen}
+          className="mt-0.5 h-5 w-5 shrink-0 rounded border-gray-400 text-ems-blue focus:ring-ems-blue"
+        />
+        <span>
+          {children} <span className="text-red-600">*</span>
+        </span>
+      </label>
       <MensajeError error={error} />
+    </div>
+  );
+}
+
+// Mail con sugerencia si el dominio parece mal escrito ("gmial.com" → "gmail.com").
+function Mail() {
+  const name = "Mail";
+  const id = slug(name);
+  const error = useError(name);
+  const ref = useRef<HTMLInputElement>(null);
+  const [sugerencia, setSugerencia] = useState("");
+
+  function revisar() {
+    setSugerencia(sugerirMail(ref.current?.value ?? ""));
+  }
+
+  function aplicar() {
+    const el = ref.current;
+    if (!el) return;
+    ponerValor(el, sugerencia);
+    setSugerencia("");
+  }
+
+  return (
+    <div>
+      <Etiqueta htmlFor={id}>Mail</Etiqueta>
+      <Ayuda>Preferentemente una cuenta de Gmail. Te vamos a escribir a esta dirección.</Ayuda>
+      <input
+        ref={ref}
+        id={id}
+        name={name}
+        type="email"
+        required
+        autoComplete="email"
+        inputMode="email"
+        defaultValue={useBorrador(name)}
+        onBlur={revisar}
+        aria-invalid={!!error}
+        aria-describedby={error ? `${id}-error` : undefined}
+        data-resumen="Mail"
+        className={inputCls(error)}
+      />
+      {sugerencia && (
+        <p className="mt-1.5 text-sm text-gray-700">
+          ¿Quisiste decir{" "}
+          <button type="button" onClick={aplicar} className="font-medium text-ems-blue underline underline-offset-2">
+            {sugerencia}
+          </button>
+          ?
+        </p>
+      )}
+      <MensajeError id={`${id}-error`} error={error} />
     </div>
   );
 }
 
 // La casilla solo se puede marcar después de abrir el documento.
 // El documento se muestra dentro de la página y se acepta desde ahí.
-function Acepto({ name, href, doc }: { name: string; href: string; doc: string }) {
+function Acepto({ name, documento }: { name: string; documento: Documento }) {
+  const doc = documento.titulo;
+  const valor = `Leído y aceptado: ${doc}`;
   const error = useError(name);
-  const yaAceptado = !!useBorrador(name);
+  const yaAceptado = useBorrador(name) === valor;
+  // "visto": el documento se mostró completo (o, si no cargó, se abrió el PDF).
   const [abierto, setAbierto] = useState(yaAceptado);
+  const [carga, setCarga] = useState<"cargando" | "lista" | "error">("cargando");
+  const [pdfAbierto, setPdfAbierto] = useState(false);
   const [aviso, setAviso] = useState(false);
   const checkRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Mientras el documento carga no se puede aceptar ni cerrar.
+  const puedeAceptar = carga === "lista" || (carga === "error" && pdfAbierto);
+  const puedeCerrar = carga !== "cargando";
+  const limite = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   function abrir() {
-    setAbierto(true);
     setAviso(false);
     dialogRef.current?.showModal();
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth) return documentoListo(); // ya estaba en caché
+    // Si en 15 segundos no cargó, lo tratamos como error para que nadie quede trabado.
+    clearTimeout(limite.current);
+    limite.current = setTimeout(() => setCarga((c) => (c === "cargando" ? "error" : c)), 15000);
+  }
+
+  function documentoListo() {
+    clearTimeout(limite.current);
+    setCarga("lista");
+    setAbierto(true);
+  }
+
+  function abrirPdf() {
+    setPdfAbierto(true);
+    if (carga === "error") setAbierto(true);
   }
 
   function aceptar() {
@@ -787,7 +1026,7 @@ function Acepto({ name, href, doc }: { name: string; href: string; doc: string }
             ref={checkRef}
             type="checkbox"
             name={name}
-            value="Leído y aceptado"
+            value={valor}
             required
             defaultChecked={yaAceptado}
             data-resumen={doc}
@@ -820,28 +1059,75 @@ function Acepto({ name, href, doc }: { name: string; href: string; doc: string }
         ref={dialogRef}
         aria-label={doc}
         className="w-full max-w-3xl h-[90vh] p-0 rounded-[10px] backdrop:bg-black/50"
-        onClick={(e) => e.target === dialogRef.current && dialogRef.current?.close()}
+        onClick={(e) => puedeCerrar && e.target === dialogRef.current && dialogRef.current?.close()}
+        // Esc o tocar afuera (Chrome cierra los diálogos así): bloqueado mientras carga.
+        onCancel={(e) => !puedeCerrar && e.preventDefault()}
       >
         <div className="flex h-full flex-col font-articulat">
           <div className="flex items-center justify-between gap-3 border-b border-gray-200 px-4 py-3">
             <span className="font-bold text-gray-900">{doc}</span>
-            <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 underline">
-              Abrir en otra pestaña
+            <a
+              href={documento.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={abrirPdf}
+              className="shrink-0 text-sm text-gray-600 underline"
+            >
+              Descargar PDF
             </a>
           </div>
-          <iframe src={vistaPrevia(href)} title={doc} className="w-full flex-1" loading="lazy" />
+          <div className="relative flex-1 overflow-y-auto bg-gray-100 p-2 sm:p-4">
+            {carga === "cargando" && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-gray-600" role="status">
+                <span className="h-8 w-8 animate-spin rounded-full border-[3px] border-ems-blue/30 border-t-ems-blue" />
+                Cargando el documento...
+              </div>
+            )}
+            {carga === "error" ? (
+              <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center text-gray-700">
+                <p>No se pudo mostrar el documento acá. Abrilo en PDF para leerlo y después volvé para aceptarlo.</p>
+                <a
+                  href={documento.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={abrirPdf}
+                  className="inline-flex h-11 items-center rounded-[10px] border-2 border-ems-blue px-5 font-medium text-ems-blue hover:bg-ems-blue/10"
+                >
+                  Abrir el PDF
+                </a>
+              </div>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                ref={imgRef}
+                src={documento.imagen}
+                alt={doc}
+                loading="lazy"
+                onLoad={documentoListo}
+                onError={() => {
+                  clearTimeout(limite.current);
+                  setCarga("error");
+                }}
+                className={`mx-auto w-full max-w-2xl bg-white shadow-sm transition-opacity ${
+                  carga === "lista" ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            )}
+          </div>
           <div className="flex justify-end gap-3 border-t border-gray-200 px-4 py-3">
             <button
               type="button"
               onClick={() => dialogRef.current?.close()}
-              className="h-11 px-4 rounded-[10px] border-2 border-gray-300 font-medium text-gray-700 hover:bg-gray-50"
+              disabled={!puedeCerrar}
+              className="h-11 px-4 rounded-[10px] border-2 border-gray-300 font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Cerrar
             </button>
             <button
               type="button"
               onClick={aceptar}
-              className="h-11 px-5 rounded-[10px] bg-ems-blue font-medium text-white transition-colors duration-300 hover:bg-[#5F86F5]"
+              disabled={!puedeAceptar}
+              className="h-11 px-5 rounded-[10px] bg-ems-blueStrong font-semibold text-white transition-colors duration-300 hover:bg-[#3A5BCC] disabled:cursor-not-allowed disabled:opacity-40"
             >
               Leí y acepto
             </button>
@@ -850,11 +1136,6 @@ function Acepto({ name, href, doc }: { name: string; href: string; doc: string }
       </dialog>
     </div>
   );
-}
-
-// Convierte un link de Google Docs (/edit) en su vista para incrustar (/preview).
-function vistaPrevia(url: string) {
-  return url.replace(/\/(edit|view)[^/]*$/, "/preview");
 }
 
 // Pregunta Sí/No que pide detalle si la respuesta es Sí.
@@ -910,88 +1191,241 @@ function SiNo({ name, label }: { name: string; label: string }) {
   );
 }
 
+// Carta pastoral: se sube ahora o se elige subirla después (llega un link por mail).
 function Archivo() {
   const name = "Carta pastoral";
+  const guardada = useBorrador(ENTREGA);
+  const [modo, setModo] = useState(guardada ?? "");
   const [archivo, setArchivo] = useState<string | null>(null);
+  const [procesando, setProcesando] = useState(false);
   const [arrastrando, setArrastrando] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listos = useRef(new WeakSet<File>());
+  const errorModo = useError(ENTREGA);
   const error = useError(name);
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+  // Si la persona ya había elegido la carta, la recuperamos del navegador.
+  useEffect(() => {
+    if (modo !== "Ahora") return;
+    let cancelado = false;
+    leerCarta().then((f) => {
+      const input = inputRef.current;
+      if (cancelado || !f || !input || input.files?.length) return;
+      listos.current.add(f);
+      ponerEnInput(input, f);
+      setArchivo(f.name);
+    });
+    return () => {
+      cancelado = true;
+    };
+  }, [modo]);
+
+  async function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setArrastrando(false);
     const input = e.target;
     const f = input.files?.[0];
+    if (!f) {
+      setArchivo(null);
+      borrarCarta();
+      return;
+    }
+    if (listos.current.has(f)) return; // es el aviso que disparamos abajo
     input.setCustomValidity("");
-    if (!f) return setArchivo(null);
-    const tipoOk = f.type === "application/pdf" || f.type.startsWith("image/");
-    if (!tipoOk) input.setCustomValidity("El archivo tiene que ser un PDF o una imagen.");
-    else if (f.size > MAX_ARCHIVO_MB * 1024 * 1024)
-      input.setCustomValidity(`El archivo pesa más de ${MAX_ARCHIVO_MB} MB.`);
-    setArchivo(input.validity.valid ? f.name : null);
+    setProcesando(true);
+    const listo = await prepararArchivo(f);
+    setProcesando(false);
+    listos.current.add(listo);
+    ponerEnInput(input, listo);
+    const msg = errorArchivo(listo);
+    input.setCustomValidity(msg);
+    setArchivo(msg ? null : listo.name);
+    if (!msg) guardarCarta(listo);
+    // Avisamos al formulario para que valide y guarde el borrador con el archivo final.
+    input.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
   return (
-    <div>
-      <Etiqueta htmlFor="carta-pastoral">Carta pastoral firmada</Etiqueta>
-      {/* El input cubre todo el recuadro, así se puede tocar o arrastrar el archivo encima. */}
-      <div
-        onDragEnter={() => setArrastrando(true)}
-        onDragLeave={() => setArrastrando(false)}
-        className={`relative flex flex-col items-center justify-center gap-1 rounded-[10px] border-2 border-dashed px-6 py-8 text-center transition-colors focus-within:ring-2 focus-within:ring-ems-blue/40 ${
-          arrastrando
-            ? "border-ems-blue bg-ems-blue/10"
-            : archivo
-            ? "border-ems-blue bg-ems-blue/5"
-            : error
-            ? "border-red-400 bg-red-50"
-            : "border-gray-300 hover:border-ems-blue/60"
-        }`}
-      >
-        {archivo ? (
-          <>
-            <span className="font-medium text-gray-900 break-all">{archivo}</span>
-            <span className="text-sm text-ems-blue underline underline-offset-2">Cambiar archivo</span>
-          </>
-        ) : (
-          <>
-            <span className="font-medium text-gray-900">
-              <span className="text-ems-blue underline underline-offset-2">Elegí el archivo</span> o arrastralo acá
-            </span>
-            <span className="text-sm text-gray-500">PDF o foto, de hasta {MAX_ARCHIVO_MB} MB</span>
-          </>
-        )}
-        <input
-          id="carta-pastoral"
-          type="file"
-          name={name}
-          accept="application/pdf,image/*"
-          required
-          onChange={onChange}
-          data-resumen="Carta pastoral"
-          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-        />
+    <div className="space-y-6">
+      <div role="radiogroup" aria-labelledby="entrega-label">
+        <Etiqueta id="entrega-label">¿Cuándo vas a subir la carta?</Etiqueta>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {[
+            ["Ahora", "Ahora, ya la tengo firmada"],
+            [DESPUES, "Más tarde, todavía no la tengo"],
+          ].map(([valor, texto]) => (
+            <label key={valor} className={`${opcionCls} ${errorModo ? "border-red-400" : ""}`}>
+              <input
+                type="radio"
+                name={ENTREGA}
+                value={valor}
+                required
+                defaultChecked={guardada === valor}
+                onChange={() => setModo(valor)}
+                data-resumen="Entrega de la carta"
+                className={radioCls}
+              />
+              {texto}
+            </label>
+          ))}
+        </div>
+        <MensajeError error={errorModo} />
       </div>
-      <MensajeError error={error} />
-      <p className="mt-2 text-sm text-gray-500">
-        Si tenés problemas para adjuntarla, enviala a{" "}
-        <a href={`mailto:${EMAIL_CONTACTO}`} className="underline">
-          {EMAIL_CONTACTO}
-        </a>
-        . La inscripción no se confirma sin la carta.
-      </p>
+
+      {modo === "Ahora" && (
+        <div>
+          <Etiqueta htmlFor="carta-pastoral">Carta pastoral firmada</Etiqueta>
+          {/* El input cubre todo el recuadro, así se puede tocar o arrastrar el archivo encima. */}
+          <div
+            onDragEnter={() => setArrastrando(true)}
+            onDragLeave={() => setArrastrando(false)}
+            className={`relative flex flex-col items-center justify-center gap-1 rounded-[10px] border-2 border-dashed px-6 py-8 text-center transition-colors focus-within:ring-2 focus-within:ring-ems-blue/40 ${
+              arrastrando
+                ? "border-ems-blue bg-ems-blue/10"
+                : archivo
+                ? "border-ems-blue bg-ems-blue/5"
+                : error
+                ? "border-red-400 bg-red-50"
+                : "border-gray-300 hover:border-ems-blue/60"
+            }`}
+          >
+            {procesando ? (
+              <span className="font-medium text-gray-700">Preparando el archivo...</span>
+            ) : archivo ? (
+              <>
+                <span className="font-medium text-gray-900 break-all">{archivo}</span>
+                <span className="text-sm text-ems-blue underline underline-offset-2">Cambiar archivo</span>
+              </>
+            ) : (
+              <>
+                <span className="font-medium text-gray-900">
+                  <span className="text-ems-blue underline underline-offset-2">Elegí el archivo</span> o arrastralo acá
+                </span>
+                <span className="text-sm text-gray-500">PDF o foto, de hasta {MAX_ARCHIVO_MB} MB</span>
+              </>
+            )}
+            <input
+              ref={inputRef}
+              id="carta-pastoral"
+              type="file"
+              name={name}
+              accept="application/pdf,image/*,.heic,.heif"
+              required
+              onChange={onChange}
+              data-resumen="Carta pastoral"
+              className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+            />
+          </div>
+          <MensajeError error={error} />
+          <p className="mt-2 text-sm text-gray-500">
+            Si tenés problemas para adjuntarla, enviala a{" "}
+            <a href={`mailto:${EMAIL_CONTACTO}`} className="underline">
+              {EMAIL_CONTACTO}
+            </a>
+            .
+          </p>
+        </div>
+      )}
+
+      {modo === DESPUES && (
+        <p className="rounded-[10px] bg-ems-blue/10 px-4 py-3 text-gray-800">
+          Podés enviar la inscripción igual. Te vamos a mandar un mail con un link para subir la
+          carta cuando la tengas. <b className="font-medium">La inscripción no se confirma hasta recibirla.</b>
+        </p>
+      )}
     </div>
+  );
+}
+
+/* ---------- Aviso emergente ---------- */
+
+// Ventana en el centro de la pantalla para errores al enviar: en celular un aviso al final
+// del formulario puede quedar fuera de la vista.
+function Aviso({ aviso }: { aviso: { titulo: string; texto: string } | null }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const d = ref.current;
+    if (!d) return;
+    if (aviso && !d.open) d.showModal();
+    if (!aviso && d.open) d.close();
+  }, [aviso]);
+
+  return (
+    <dialog
+      ref={ref}
+      aria-labelledby="aviso-titulo"
+      onClick={(e) => e.target === ref.current && ref.current?.close()}
+      className="w-[min(92vw,28rem)] rounded-[10px] p-0 backdrop:bg-black/50"
+    >
+      <div role="alert" className="p-6 font-articulat">
+        <h2 id="aviso-titulo" className="text-xl font-bold text-gray-900">
+          {aviso?.titulo}
+        </h2>
+        <p className="mt-3 text-gray-700 leading-relaxed">{aviso?.texto}</p>
+        <div className="mt-6 flex flex-wrap justify-end gap-3">
+          <a
+            href={`mailto:${EMAIL_CONTACTO}`}
+            className="inline-flex h-11 items-center rounded-[10px] border-2 border-ems-blue px-4 font-medium text-ems-blue hover:bg-ems-blue/10"
+          >
+            Escribirles
+          </a>
+          <button
+            type="button"
+            onClick={() => ref.current?.close()}
+            autoFocus
+            className="h-11 rounded-[10px] bg-ems-blueStrong px-5 font-semibold text-white hover:bg-[#3A5BCC]"
+          >
+            Entendido
+          </button>
+        </div>
+      </div>
+    </dialog>
   );
 }
 
 /* ---------- Envío exitoso ---------- */
 
-function Exito() {
+function Exito({ linkCarta }: { linkCarta?: string }) {
+  const [copiado, setCopiado] = useState(false);
+
+  async function copiar() {
+    try {
+      await navigator.clipboard.writeText(linkCarta!);
+      setCopiado(true);
+    } catch {}
+  }
+
   return (
     <div className="font-articulat rounded-[10px] border border-gray-200 bg-white px-5 sm:px-10 py-12 shadow-sm">
       <h2 className="text-3xl font-bold text-ems-blue">¡Inscripción enviada!</h2>
       <p className="mt-4 text-lg text-gray-700">
         Gracias. Recibimos tus datos y te enviamos un mail de confirmación.
       </p>
-      <p className="mt-2 text-gray-700">
+
+      {linkCarta && (
+        <div className="mt-6 rounded-[10px] border-2 border-ems-sun bg-ems-sun/10 p-5">
+          <h3 className="font-bold text-gray-900">Falta la carta pastoral</h3>
+          <p className="mt-1 text-gray-700">
+            Cuando la tengas firmada, subila desde este link. También te lo mandamos por mail.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a
+              href={linkCarta}
+              className="inline-flex h-11 items-center rounded-[10px] bg-ems-blueStrong px-5 font-semibold text-white transition-colors duration-300 hover:bg-[#3A5BCC]"
+            >
+              Subir la carta
+            </a>
+            <button
+              type="button"
+              onClick={copiar}
+              className="h-11 rounded-[10px] border-2 border-ems-blue px-5 font-medium text-ems-blue transition-colors duration-300 hover:bg-ems-blue/10"
+            >
+              {copiado ? "Link copiado" : "Copiar link"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      <p className="mt-6 text-gray-700">
         En los próximos días nos vamos a comunicar con vos para coordinar la entrevista. Si tenés
         alguna consulta, escribinos a{" "}
         <a href={`mailto:${EMAIL_CONTACTO}`} className="underline">
@@ -1019,14 +1453,36 @@ function mensajeError(el: Control): string {
   if (v.valid) return "";
   if (v.customError) return el.validationMessage;
   if (v.valueMissing) {
-    if (el.type === "checkbox") return "Tenés que aceptar este documento para continuar.";
+    if (el.type === "checkbox") return el.dataset.msg || "Tenés que aceptar este documento para continuar.";
     if (el.type === "radio" || el.tagName === "SELECT") return "Elegí una opción.";
     if (el.type === "file") return "Adjuntá la carta pastoral.";
     return "Este campo es obligatorio.";
   }
   if (v.typeMismatch && el.type === "email") return "Ingresá un mail válido.";
-  if (v.patternMismatch) return el.dataset.msg || "Revisá este dato.";
+  if (v.patternMismatch || v.rangeOverflow || v.rangeUnderflow || v.badInput) {
+    return el.dataset.msg || "Revisá este dato.";
+  }
   return el.validationMessage;
+}
+
+// Limpia lo que escribió la persona: espacios sobrantes, mail en minúsculas, DNI solo números.
+function normalizar(el: Control): string {
+  if (el instanceof HTMLTextAreaElement) {
+    return el.value.trim().replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n");
+  }
+  if (!(el instanceof HTMLInputElement) || !["text", "email", "tel"].includes(el.type)) return el.value;
+  if (el.type === "email") return el.value.replace(/\s/g, "").toLowerCase();
+  if (el.name === "DNI") return el.value.replace(/\D/g, "");
+  return el.value.trim().replace(/\s+/g, " ");
+}
+
+// Cambia el valor con el setter nativo y avisa con un evento "input",
+// así React, la validación y el borrador se enteran del cambio.
+function ponerValor(el: Control, valor: string) {
+  if (el.value === valor) return;
+  const proto = el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+  Object.getOwnPropertyDescriptor(proto, "value")!.set!.call(el, valor);
+  el.dispatchEvent(new Event("input", { bubbles: true }));
 }
 
 function slug(s: string) {
@@ -1037,11 +1493,67 @@ function slug(s: string) {
     .replace(/[^a-z0-9]+/g, "-");
 }
 
-function leerArchivo(f: File): Promise<{ nombre: string; tipo: string; base64: string }> {
-  return new Promise((resolve, reject) => {
-    const r = new FileReader();
-    r.onload = () => resolve({ nombre: f.name, tipo: f.type, base64: String(r.result).split(",")[1] });
-    r.onerror = () => reject(r.error);
-    r.readAsDataURL(f);
-  });
+// Valida una fecha dd/mm/aaaa: que exista y que sea una fecha de nacimiento razonable.
+function errorFecha(v: string): string {
+  if (!v) return "";
+  const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v);
+  if (!m) return "Escribí la fecha como dd/mm/aaaa, por ejemplo 25/03/2000.";
+  const [d, mes, a] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  const f = new Date(a, mes - 1, d);
+  if (f.getFullYear() !== a || f.getMonth() !== mes - 1 || f.getDate() !== d) {
+    return "Esa fecha no existe. Revisá el día y el mes.";
+  }
+  if (a < 1930 || f > new Date()) return "Revisá el año de nacimiento.";
+  return "";
+}
+
+// 25032000 → 25/03/2000 (agrega las barras mientras se escribe).
+// Si la persona escribe las barras a mano, completa el cero: 15/7/1990 → 15/07/1990.
+function formatearFecha(v: string) {
+  const partes = v.split("/");
+  const n = partes
+    .map((p, i) => {
+      const d = p.replace(/\D/g, "");
+      return i < partes.length - 1 && i < 2 && d.length === 1 ? "0" + d : d;
+    })
+    .join("")
+    .slice(0, 8);
+  return [n.slice(0, 2), n.slice(2, 4), n.slice(4)].filter(Boolean).join("/");
+}
+
+// "2000-03-25" → "25/03/2000"
+function fechaLegible(v: string) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  return m ? `${m[3]}/${m[2]}/${m[1]}` : v;
+}
+
+// Sugiere el dominio conocido más parecido si hay hasta 2 letras de diferencia.
+function sugerirMail(mail: string) {
+  const m = /^([^@\s]+)@([^@\s]+)$/.exec(mail.trim().toLowerCase());
+  if (!m) return "";
+  const [, usuario, dominio] = m;
+  if (DOMINIOS_MAIL.includes(dominio)) return "";
+  let mejor = "";
+  let menor = 3;
+  for (const d of DOMINIOS_MAIL) {
+    const x = distancia(dominio, d);
+    if (x < menor) {
+      menor = x;
+      mejor = d;
+    }
+  }
+  return mejor ? `${usuario}@${mejor}` : "";
+}
+
+// Distancia de Levenshtein: cuántas letras hay que cambiar para pasar de a a b.
+function distancia(a: string, b: string) {
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[b.length];
 }

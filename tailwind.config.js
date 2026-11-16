@@ -17,6 +17,8 @@ module.exports = {
           yellow: "#E4DD50",
           // Identidad EMS'27
           blue: "#799DFF",
+          // Azul más intenso para botones con texto blanco (contraste legible).
+          blueStrong: "#4568DE",
           sun: "#FFC400",
           offwhite: "#F3F8F3",
           muted: "#959595",
@@ -76,8 +78,8 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
-        // Fuente del diseño EMS'27. Hasta tener los archivos de Articulat CF, cae en Inter.
-        articulat: ["'Articulat CF'", "var(--font-inter)", "sans-serif"],
+        // Fuente del diseño EMS'27 (cargada en app/layout.tsx).
+        articulat: ["var(--font-articulat)", "var(--font-inter)", "sans-serif"],
         'ems-light': ['ems-lazydog', 'sans-serif'],
         'ems-light-oblique': ['ems-lazydog', 'sans-serif'],
         'ems-bold': ['ems-bristol', 'sans-serif'],

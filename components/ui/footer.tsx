@@ -5,6 +5,7 @@ const EMAIL = "infoescuelams@gmail.com";
 
 const LINKS = [
   { href: "/inscripcion", texto: "Inscripción" },
+  { href: "/documents/carta-pastoral-2027.pdf", texto: "Carta pastoral" },
   { href: "/#values", texto: "Nuestros valores" },
   { href: "/#misiones", texto: "Viajes misioneros" },
   { href: "/#testimonios", texto: "Testimonios" },
